@@ -1,0 +1,25 @@
+# seb42_pre_027
+## 
+설명, 팀이름, 데모
+
+## 👨‍👩‍👧‍👦 Team
+| 조은선<br>(FE, 팀장) | 윤영원<br>(FE) | 박철우<br>(BE, 부팀장) | 박채은<br>(BE) | 하태종<br>(BE) |
+| :---: | :---: | :---: | :---: | :---: |
+|  |  |  |  |  |
+| [@es39](https://github.com/es39) |    [@Yoonable](https://github.com/Yoonable) | [@klouxia](https://github.com/klouxia) | [@cherry2030](https://github.com/cherry2030) | [@Kimlabe](https://github.com/Kimlabe) |
+|||||
+
+### Commit 컨벤션
+|커밋명|내용|
+|------|---|
+|fix|버그 수정|
+|feat|추가|
+|docs|문서 수정|
+|remove|파일 삭제|
+|test|테스트|
+|rename|파일명 혹은 폴더명 수정|
+|comment|주석|
+|style|코드 스타일 수정|
+|design|CSS 변경|
+|hotfix|긴급 수정|
+|merge|병합|
