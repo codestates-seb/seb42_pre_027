@@ -1,4 +1,4 @@
-export const BeforeLoginMain = () => {
+const BeforeLoginMain = () => {
   return <></>;
 };
 

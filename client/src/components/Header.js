@@ -1,4 +1,4 @@
-export const Header = () => {
+const Header = () => {
   return <></>;
 };
 

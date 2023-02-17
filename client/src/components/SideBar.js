@@ -1,4 +1,4 @@
-export const SideBar = () => {
+const SideBar = () => {
   return <></>;
 };
 

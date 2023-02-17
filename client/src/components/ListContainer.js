@@ -1,4 +1,4 @@
-export const ListContainer = () => {
+const ListContainer = () => {
   return <></>;
 };
 

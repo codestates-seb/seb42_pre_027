@@ -1,4 +1,4 @@
-export const CreateQuestion = () => {
+const CreateQuestion = () => {
   return <></>;
 };
 
