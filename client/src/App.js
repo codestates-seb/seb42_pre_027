@@ -1,23 +1,28 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import logo from './logo.svg';
+
+import BeforeLoginMain from './pages/BeforeLoginMain';
+import CreateQuestion from './pages/CreateQuestion';
+import Login from './pages/Login';
+import Main from './pages/Main';
+import ReadQuestion from './pages/ReadQuestion';
+import SignUp from './pages/SignUp';
+import UpdateQuestion from './pages/UpdateQuestion';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          코에능 화이팅!
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<BeforeLoginMain />}></Route>
+          <Route path="/main" element={<Main />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/readquestion" element={<ReadQuestion />}></Route>
+          <Route path="/createquestion" element={<CreateQuestion />}></Route>
+          <Route path="/updatequestion" element={<UpdateQuestion />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
