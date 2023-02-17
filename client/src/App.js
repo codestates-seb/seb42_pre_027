@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import GlobalStyle from './GlobalStyle';
 
 import BeforeLoginMain from './pages/BeforeLoginMain';
 import CreateQuestion from './pages/CreateQuestion';
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <GlobalStyle />
         <Routes>
           <Route path="/" element={<BeforeLoginMain />}></Route>
           <Route path="/main" element={<Main />}></Route>
