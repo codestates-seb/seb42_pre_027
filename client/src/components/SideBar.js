@@ -1,20 +1,19 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Footer from './Footer';
-import Header from './Header';
+import { ReactComponent as ExploreLogo } from '../svg/explorelogo.svg';
 
 const Side = styled.div`
   background-color: white;
   width: 164px;
-  height: 100vh;
-  z-index: 0;
+  height: 100%;
+  z-index: 20;
+  top: 30px;
   text-align: left;
   display: flex;
   /* border-right: 3px solid #f48023; */
   border-right: 1px solid rgb(181, 181, 181);
-  position: sticky;
+  position: relative;
   padding-top: 24px;
-
   * {
     list-style: none;
   }
@@ -31,7 +30,7 @@ const Side = styled.div`
   }
   span {
     /* 글씨색 추가 */
-    padding-left: 30px;
+    padding-left: 10px;
     font-size: 0.85em;
     margin-top: 7.5px;
     margin-bottom: 7.5px;
@@ -61,11 +60,15 @@ const Side = styled.div`
   }
 `;
 
+const AllNav = styled.div`
+  position: fixed;
+  width: 160px;
+`;
+
 const SideBar = () => {
   return (
-    <div>
-      <Header />
-      <Side>
+    <Side>
+      <AllNav>
         <ol className="nav-links">
           <li id="home" className="content">
             <Link to="/main">Home</Link>
@@ -88,6 +91,7 @@ const SideBar = () => {
             </li>
             <li className="nav-menu">COLLECTIVES</li>
             <li>
+              <ExploreLogo />
               <span>Explore Collectives</span>
             </li>
           </ol>
@@ -98,9 +102,8 @@ const SideBar = () => {
             </li>
           </ol>
         </ol>
-      </Side>
-      <Footer />
-    </div>
+      </AllNav>
+    </Side>
   );
 };
 

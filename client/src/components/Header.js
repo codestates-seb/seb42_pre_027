@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { ReactComponent as Logo } from '../svg/stackoverflow.svg';
 
 const FirstDiv = styled.div`
@@ -10,7 +10,7 @@ const FirstDiv = styled.div`
   position: fixed;
   top: 0;
   box-shadow: 0px 2px 3px rgba(217, 218, 219);
-
+  z-index: 999;
   div {
     display: flex;
     justify-content: center;

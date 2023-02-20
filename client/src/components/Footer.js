@@ -5,7 +5,10 @@ const FirstDiv = styled.div`
   background-color: rgba(32, 34, 37);
   display: flex;
   justify-content: center;
-
+  z-index: 999;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   span {
     margin: 20px 0 0;
   }
@@ -34,39 +37,39 @@ const FirstDiv = styled.div`
 
 const Footer = () => {
   return (
-    <footer>
-      <FirstDiv>
-        <span>
-          <Logo fill="current" />
-        </span>
-        <ul>
-          <li>SUPPORT</li>
-          <li>codestates</li>
-        </ul>
-        <ul>
-          <li>DEVELOPMENT</li>
-          <li>조은선(FE)</li>
-          <li>윤영원(FE)</li>
-          <li>박철우(BE)</li>
-          <li>박채은(BE)</li>
-          <li>하태종(BE)</li>
-        </ul>
-        <ul>
-          <li>TECHNOLOGY STACKS</li>
-          <li>react</li>
-          <li>springboot</li>
-          <li>aws</li>
-        </ul>
+    // <footer>
+    <FirstDiv className="footer">
+      <span>
+        <Logo fill="current" />
+      </span>
+      <ul>
+        <li>SUPPORT</li>
+        <li>codestates</li>
+      </ul>
+      <ul>
+        <li>DEVELOPMENT</li>
+        <li>조은선(FE)</li>
+        <li>윤영원(FE)</li>
+        <li>박철우(BE)</li>
+        <li>박채은(BE)</li>
+        <li>하태종(BE)</li>
+      </ul>
+      <ul>
+        <li>TECHNOLOGY STACKS</li>
+        <li>react</li>
+        <li>springboot</li>
+        <li>aws</li>
+      </ul>
 
-        <p>
-          Site design / logo © 2023 Stack Exchange Inc; user contributions
-          <br />
-          licensed under CC BY-SA.
-          <br />
-          rev 2023.2.17.43248
-        </p>
-      </FirstDiv>
-    </footer>
+      <p>
+        Site design / logo © 2023 Stack Exchange Inc; user contributions
+        <br />
+        licensed under CC BY-SA.
+        <br />
+        rev 2023.2.17.43248
+      </p>
+    </FirstDiv>
+    // </footer>
   );
 };
 

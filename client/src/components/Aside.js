@@ -5,9 +5,12 @@ const RightAside = styled.aside`
   /* -webkit-box-pack: end; */
   justify-content: flex-end;
   margin-right: 3%;
-  width: 20%;
+  width: 100%;
   min-width: 300px;
   text-align: left;
+  top: 60px;
+  position: relative;
+  right: 5px;
   ul {
     border: 1px solid rgb(234, 215, 146);
     border-radius: 3px;
