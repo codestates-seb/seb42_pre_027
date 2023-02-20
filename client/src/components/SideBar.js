@@ -41,9 +41,8 @@ const Side = styled.div`
   }
   .content {
     display: flex;
-    width: 161px;
+    width: 164px;
     height: 35px;
-    margin-left: 3px;
     > a {
       display: flex;
       align-items: center;
