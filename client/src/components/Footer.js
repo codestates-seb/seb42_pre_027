@@ -12,11 +12,13 @@ const FirstDiv = styled.div`
   ul {
     margin: 20px 50px;
     list-style: none;
+    text-align: start;
   }
 
   ul li:first-child {
     font-size: medium;
     color: rgba(177, 183, 188);
+    margin-bottom: 15px;
   }
   ul li {
     font-size: small;
