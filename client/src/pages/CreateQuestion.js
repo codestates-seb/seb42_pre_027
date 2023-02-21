@@ -4,17 +4,17 @@ import Header from '../components/Header';
 
 /* list-style: disc */
 
-const CreateBox = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #f8f9f9;
-`;
+// const CreateBox = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   background-color: #f8f9f9;
+// `;
 
 const Content = styled.main`
   width: 100%;
   max-width: 1264px;
   margin: 0 auto;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -23,16 +23,15 @@ const Content = styled.main`
   /* transform: translate(-50%, -50%);
   top: 50%;
   left: 50%; */
+  background-color: transparent;
+  border-left: 0;
+  border-right: 0;
   .top {
-    display: flex;
-    background-image: url(https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368);
-    background-position: right center;
-    background-repeat: no-repeat;
-    height: 150px;
-    width: 100%;
     h1 {
-      display: flex;
-      align-items: center;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      font-weight: 600;
+      text-align: center;
     }
   }
 `;
@@ -112,6 +111,12 @@ const ContentBox = styled.section`
     margin-top: 20px;
     textarea {
       max-height: calc(var(--s-step) * 6);
+      border: 1px solid hsl(210, 8%, 90%);
+      border-radius: 4px;
+      /* height: 300px; */
+      margin-top: 10px;
+      width: 100%;
+      padding: 5px;
     }
   }
   button {
@@ -123,7 +128,7 @@ const ContentBox = styled.section`
 
 const CreateQuestion = () => {
   return (
-    <CreateBox>
+    <>
       <Header />
       <Content>
         <div className="top">
@@ -174,7 +179,7 @@ const CreateQuestion = () => {
         </ContentBox>
       </Content>
       <Footer />
-    </CreateBox>
+    </>
   );
 };
 
