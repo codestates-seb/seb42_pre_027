@@ -14,7 +14,8 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-    /* max-width: 1264px; */
+    max-width: 1264px;
+    margin: 0 auto;
   }
 `;
 
@@ -24,8 +25,10 @@ const MainPage = styled.main`
   width: 100%;
   max-width: 1100px;
   justify-content: space-between;
-  > main {
+  > section {
     display: flex;
+    width: 100%;
+    height: 100vh;
   }
   > button {
     width: 500px;
@@ -36,6 +39,7 @@ const MainPage = styled.main`
     /* width: 100%; */
     position: absolute;
     padding-top: 60px;
+    margin-left: 50px;
   }
 `;
 
