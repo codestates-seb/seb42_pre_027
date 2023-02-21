@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { ReactComponent as ExploreLogo } from '../svg/explorelogo.svg';
 
 const Side = styled.div`
-  background-color: white;
   width: 164px;
   height: 100%;
   z-index: 20;
@@ -11,7 +10,7 @@ const Side = styled.div`
   text-align: left;
   display: flex;
   /* border-right: 3px solid #f48023; */
-  border-right: 1px solid rgb(181, 181, 181);
+  /* border-right: 1px solid #b5b5b5; */
   position: relative;
   padding-top: 24px;
   * {
@@ -62,7 +61,9 @@ const Side = styled.div`
 
 const AllNav = styled.div`
   position: fixed;
-  width: 160px;
+  width: 164px;
+  border-right: 1px solid #b5b5b5;
+  height: 100%;
 `;
 
 const SideBar = () => {

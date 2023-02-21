@@ -5,7 +5,7 @@ const RightAside = styled.aside`
   /* -webkit-box-pack: end; */
   justify-content: flex-end;
   margin-right: 3%;
-  width: 100%;
+  /* width: 100%; */
   min-width: 300px;
   text-align: left;
   top: 60px;
