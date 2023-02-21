@@ -24,7 +24,7 @@ public class Question extends Auditable {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
     private String tag;
 
