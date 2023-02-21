@@ -24,7 +24,7 @@ const MainQuestion = styled.main`
 
 const Content = styled.section`
   display: flex;
-  justify-content: center;
+  /* justify-content: space-between; */
   align-items: center;
   flex-direction: column;
   width: 90%;
@@ -50,10 +50,16 @@ const Content = styled.section`
       color: hsl(210, 8%, 45%);
     }
   }
-  .infocontent {
+  .content {
     display: flex;
     justify-content: center;
     align-items: center;
+    .questioncontent {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid #babfc3;
+      padding-bottom: 16px;
+    }
   }
 `;
 
@@ -76,9 +82,12 @@ const ReadQuestion = () => {
               <span>Modified today</span>
               <span>View 39 times</span>
             </div>
-            <div className="infocontent">
-              <div>작성한 내용</div>
-              <div>답변</div>
+            <div className="content">
+              <div className="questioncontent">
+                <div>숫자</div>
+                <div className="">ddddd</div>
+              </div>
+              <div className="questionanswer">답변</div>
               <Answer />
               <Aside />
             </div>
@@ -94,5 +103,13 @@ export default ReadQuestion;
 
 /* TODO: 
 1. 기본 구조 구현
-2. 답변 기능 구현
+2. 질문 렌더링 (DB에서 데이터 가져와서 렌더링)
+2-1. data.title
+2-2. data.content
+2-3. data.writer
+3. 답변 기능 구현
+3-1. 답변 read
+3-2. 답변 create
+3-3. 답변 update
+3-4. 답변 delete
 */
