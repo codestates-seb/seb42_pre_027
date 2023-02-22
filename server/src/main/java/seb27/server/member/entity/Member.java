@@ -1,4 +1,4 @@
-package seb27.server.Member.entity;
+package seb27.server.member.entity;
 
 
 import lombok.Getter;

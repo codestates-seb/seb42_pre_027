@@ -1,12 +1,10 @@
-package seb27.server.Member.mapper;
+package seb27.server.member.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.stereotype.Service;
-import seb27.server.Member.dto.MemberDto;
-import seb27.server.Member.entity.Member;
-
-import java.util.List;
+import seb27.server.member.dto.MemberDto;
+import seb27.server.member.entity.Member;
 
 @Service
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)

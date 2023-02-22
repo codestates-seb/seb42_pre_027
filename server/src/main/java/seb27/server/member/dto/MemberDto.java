@@ -1,4 +1,4 @@
-package seb27.server.Member.dto;
+package seb27.server.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
