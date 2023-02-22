@@ -32,10 +32,10 @@ public class Question extends Auditable {
     private Long answerCount;
     private Long viewCount;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<Answer> answers = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "USER_ID")
     private Member member;
 }
