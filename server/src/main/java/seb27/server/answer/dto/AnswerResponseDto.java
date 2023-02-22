@@ -11,5 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AnswerResponseDto {
     private long answerId;
+    private long userId;
     private String content;
+    private String username;
 }

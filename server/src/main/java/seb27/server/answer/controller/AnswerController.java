@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import seb27.server.answer.dto.AnswerPatchDto;
 import seb27.server.answer.dto.AnswerPostDto;
+import seb27.server.answer.dto.AnswerResponseDto;
 import seb27.server.answer.entity.Answer;
 import seb27.server.answer.mapper.AnswerMapper;
 import seb27.server.answer.service.AnswerService;
@@ -26,9 +27,12 @@ public class AnswerController {
     public ResponseEntity postAnswer(@PathVariable("question-id") long questionId,
                                      @RequestBody AnswerPostDto postDto) {
 
-        Answer createAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto));
+        Answer createAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto), postDto.getUserId());
+        AnswerResponseDto result = answerMapper.answerToAnswerResponseDto(createAnswer);
+        result.setUserId(createAnswer.getMember().getId());
+        result.setUsername(createAnswer.getMember().getUsername());
 
-        return new ResponseEntity<>(createAnswer, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @GetMapping("/{question-id}/answers/{answer-id}")
@@ -36,8 +40,11 @@ public class AnswerController {
                                     @PathVariable("answer-id") long answerId) {
 
         Answer answer = answerService.findVerifiedAnswer(answerId);
+        AnswerResponseDto result = answerMapper.answerToAnswerResponseDto(answer);
+        result.setUserId(answer.getMember().getId());
+        result.setUsername(answer.getMember().getUsername());
 
-        return new ResponseEntity<>(answer, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{question-id}/answers")
@@ -56,8 +63,11 @@ public class AnswerController {
         Answer answer = answerMapper.answerPatchDtoToAnswer(patchDto);
         answer.setAnswerId(answerId);
         Answer patchAnswer = answerService.updateAnswer(answer);
+        AnswerResponseDto result = answerMapper.answerToAnswerResponseDto(patchAnswer);
+        result.setUserId(patchAnswer.getMember().getId());
+        result.setUsername(patchAnswer.getMember().getUsername());
 
-        return new ResponseEntity<>(patchAnswer, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @DeleteMapping("/{question-id}/answers/{answer-id}")
