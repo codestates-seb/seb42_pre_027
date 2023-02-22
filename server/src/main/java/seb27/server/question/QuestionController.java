@@ -55,6 +55,6 @@ public class QuestionController {
     // 화면 출력용
     @GetMapping("/")
     public String hello(){
-        return "hello world";
+        return "test";
     }
 }
