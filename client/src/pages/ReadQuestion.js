@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Answer from '../components/Answer';
 import AnswerContainer from '../components/AnswerContainer';
@@ -27,7 +27,7 @@ const MainQuestion = styled.main`
 
 const Content = styled.section`
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
   width: 90%;
@@ -37,6 +37,7 @@ const Content = styled.section`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding-right: 10px;
   }
   .qtitle {
     font-size: 2em;
@@ -47,16 +48,27 @@ const Content = styled.section`
     justify-content: start;
     align-items: center;
     width: 100%;
+    border-bottom: 1px solid #babfc3;
     > * {
       padding-bottom: 8px;
       margin-right: 16px;
       color: hsl(210, 8%, 45%);
     }
   }
+  .section-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+  }
   .content {
     display: flex;
+    flex-grow: 1;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
     .questioncontent {
       display: flex;
       width: 100%;
@@ -64,9 +76,20 @@ const Content = styled.section`
       padding-bottom: 16px;
     }
   }
+  #create-btn {
+    color: white;
+    padding: 10px;
+    background-color: hsl(206, 100%, 52%);
+    border-radius: 3px;
+    text-decoration: none;
+  }
 `;
 
 const ReadQuestion = () => {
+  const navigate = useNavigate();
+  const goToCreateQuestion = () => {
+    navigate('/createquestion');
+  };
   return (
     <>
       <Header />
@@ -76,8 +99,8 @@ const ReadQuestion = () => {
           <Content>
             <div className="top">
               <div className="qtitle">title</div>
-              <button>
-                <Link to="/createquestion">Ask Question</Link>
+              <button id="create-btn" onClick={goToCreateQuestion}>
+                Ask Question
               </button>
             </div>
             <div className="writinginfo">
@@ -85,15 +108,17 @@ const ReadQuestion = () => {
               <span>Modified today</span>
               <span>View 39 times</span>
             </div>
-            <div className="content">
-              <QuestionContent />
-              {/* <div className="questionanswer">답변</div> */}
-              <AnswerContainer>
-                <AnswerContent />
-              </AnswerContainer>
-              <Answer />
+            <section className="section-content">
+              <div className="content">
+                <QuestionContent />
+                {/* <div className="questionanswer">답변</div> */}
+                <AnswerContainer>
+                  <AnswerContent />
+                </AnswerContainer>
+                <Answer />
+              </div>
               <Aside />
-            </div>
+            </section>
           </Content>
         </MainQuestion>
       </Container>
