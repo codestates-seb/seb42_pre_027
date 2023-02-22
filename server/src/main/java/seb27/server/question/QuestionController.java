@@ -19,8 +19,11 @@ public class QuestionController {
 
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionDto.Post postDto){
-        Question createdQuestion = questionService.createQuestion(questionMapper.questionPostDtoToQuestion(postDto));
+        Question createdQuestion = questionService.createQuestion(questionMapper.questionPostDtoToQuestion(postDto), postDto.getUserId());
+
         QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(createdQuestion);
+        result.setUserId(createdQuestion.getMember().getId());
+        result.setUsername(createdQuestion.getMember().getUsername());
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
@@ -34,6 +37,8 @@ public class QuestionController {
     public ResponseEntity getQuestion(@PathVariable("question-id") long questionId){
         Question question = questionService.findQuestion(questionId);
         QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(question);
+        result.setUserId(question.getMember().getId());
+        result.setUsername(question.getMember().getUsername());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -42,7 +47,11 @@ public class QuestionController {
                                         @RequestBody QuestionDto.Patch patchDto){
         Question question = questionMapper.questionPatchDtoToQuestion(patchDto);
         question.setId(questionId);
-        QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(questionService.updateQuestion(question));
+
+        Question resultQuestion = questionService.updateQuestion(question);
+        QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(resultQuestion);
+        result.setUserId(resultQuestion.getMember().getId());
+        result.setUsername(resultQuestion.getMember().getUsername());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

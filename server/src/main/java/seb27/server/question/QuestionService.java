@@ -1,6 +1,8 @@
 package seb27.server.question;
 
 import org.springframework.stereotype.Service;
+import seb27.server.member.entity.Member;
+import seb27.server.member.repository.MemberRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,13 +11,17 @@ import java.util.Optional;
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final MemberRepository memberRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, MemberRepository memberRepository) {
         this.questionRepository = questionRepository;
+        this.memberRepository = memberRepository;
     }
 
 
-    public Question createQuestion(Question question){
+    public Question createQuestion(Question question, long userId){
+        Member findMember = getMemberFromId(userId);
+        question.setMember(findMember);
         return questionRepository.save(question);
     }
 
@@ -40,6 +46,10 @@ public class QuestionService {
 
     public List<Question> findAllQuestion(){
         return questionRepository.findAll();
+    }
+
+    public Member getMemberFromId(long memberId){
+        return memberRepository.findById(memberId).get();
     }
 
 }
