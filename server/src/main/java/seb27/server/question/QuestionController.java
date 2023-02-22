@@ -20,7 +20,8 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionDto.Post postDto){
         Question createdQuestion = questionService.createQuestion(questionMapper.questionPostDtoToQuestion(postDto));
-        return new ResponseEntity<>(createdQuestion, HttpStatus.CREATED);
+        QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(createdQuestion);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -32,7 +33,8 @@ public class QuestionController {
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") long questionId){
         Question question = questionService.findQuestion(questionId);
-        return new ResponseEntity<>(question, HttpStatus.OK);
+        QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(question);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PatchMapping("/{question-id}")
@@ -40,7 +42,7 @@ public class QuestionController {
                                         @RequestBody QuestionDto.Patch patchDto){
         Question question = questionMapper.questionPatchDtoToQuestion(patchDto);
         question.setId(questionId);
-        Question result = questionService.updateQuestion(question);
+        QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(questionService.updateQuestion(question));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
