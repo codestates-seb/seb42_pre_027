@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import seb27.server.member.entity.Member;
 import seb27.server.question.Question;
+import seb27.server.question.audit.Auditable;
 
 import javax.persistence.*;
 
@@ -13,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Answer {
+public class Answer extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long answerId;
@@ -21,8 +23,11 @@ public class Answer {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
+    private Member member;
 }
