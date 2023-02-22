@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Logo } from '../svg/stackoverflow.svg';
 
-const FirstDiv = styled.div`
+const FirstDiv = styled.header`
   background-color: rgba(247, 247, 248);
   width: 100%;
   height: 50px;
   border-top: 3px solid rgba(243, 121, 42);
-  position: fixed;
+  position: sticky;
   top: 0;
   box-shadow: 0px 2px 3px rgba(217, 218, 219);
   z-index: 999;
@@ -61,40 +61,40 @@ const SecondButton = styled.button`
 
 const Header = () => {
   return (
-    <header>
-      <FirstDiv>
-        <div>
-          {/* <span>MENU</span> */}
-          <span>
-            <Link to="/">
-              <Logo fill="current" />
+    // <header>
+    <FirstDiv>
+      <div>
+        {/* <span>MENU</span> */}
+        <span>
+          <Link to="/">
+            <Logo fill="current" />
+          </Link>
+        </span>
+
+        <ul className="firstUl">
+          <li>About</li>
+          <li>Product</li>
+          <li>For Teams</li>
+        </ul>
+
+        <ul className="secondUl">
+          <li>
+            <input type="text" />
+          </li>
+          <li>
+            <Link to="/login">
+              <FirstButton>Log in</FirstButton>
             </Link>
-          </span>
-
-          <ul className="firstUl">
-            <li>About</li>
-            <li>Product</li>
-            <li>For Teams</li>
-          </ul>
-
-          <ul className="secondUl">
-            <li>
-              <input type="text" />
-            </li>
-            <li>
-              <Link to="/login">
-                <FirstButton>Log in</FirstButton>
-              </Link>
-            </li>
-            <li>
-              <Link to="/signup">
-                <SecondButton>Sign up</SecondButton>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </FirstDiv>
-    </header>
+          </li>
+          <li>
+            <Link to="/signup">
+              <SecondButton>Sign up</SecondButton>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </FirstDiv>
+    // </header>
   );
 };
 

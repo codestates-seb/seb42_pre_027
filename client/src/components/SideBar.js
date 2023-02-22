@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import { ReactComponent as ExploreLogo } from '../svg/explorelogo.svg';
 
 const Side = styled.div`
+  background-color: white;
   width: 164px;
-  height: 100%;
+  /* height: 100%; */
   z-index: 20;
-  top: 30px;
+  /* top: 30px; */
   text-align: left;
   display: flex;
   /* border-right: 3px solid #f48023; */
-  /* border-right: 1px solid #b5b5b5; */
+  border-right: 1px solid rgb(181, 181, 181);
   position: relative;
   padding-top: 24px;
   * {
@@ -36,6 +37,7 @@ const Side = styled.div`
   }
   #home {
     font-size: 0.85em;
+    padding-left: 5px;
   }
   .content {
     display: flex;
@@ -59,51 +61,42 @@ const Side = styled.div`
   }
 `;
 
-const AllNav = styled.div`
-  position: fixed;
-  width: 164px;
-  border-right: 1px solid #b5b5b5;
-  height: 100%;
-`;
-
 const SideBar = () => {
   return (
     <Side>
-      <AllNav>
+      <ol className="nav-links">
+        <li id="home" className="content">
+          <Link to="/main">Home</Link>
+        </li>
         <ol className="nav-links">
-          <li id="home" className="content">
-            <Link to="/main">Home</Link>
+          <li className="nav-menu">PUBLIC</li>
+          <li className="content">
+            <Link to="/main">
+              <span>Question</span>
+            </Link>
           </li>
-          <ol className="nav-links">
-            <li className="nav-menu">PUBLIC</li>
-            <li className="content">
-              <Link to="/main">
-                <span>Question</span>
-              </Link>
-            </li>
-            <li>
-              <span>Tags</span>
-            </li>
-            <li>
-              <span>User</span>
-            </li>
-            <li>
-              <span>Companies</span>
-            </li>
-            <li className="nav-menu">COLLECTIVES</li>
-            <li>
-              <ExploreLogo />
-              <span>Explore Collectives</span>
-            </li>
-          </ol>
-          <ol>
-            <li className="nav-menu">TEAMS</li>
-            <li>
-              <span>Create free Team</span>
-            </li>
-          </ol>
+          <li>
+            <span>Tags</span>
+          </li>
+          <li>
+            <span>User</span>
+          </li>
+          <li>
+            <span>Companies</span>
+          </li>
+          <li className="nav-menu">COLLECTIVES</li>
+          <li>
+            <ExploreLogo />
+            <span>Explore Collectives</span>
+          </li>
         </ol>
-      </AllNav>
+        <ol>
+          <li className="nav-menu">TEAMS</li>
+          <li>
+            <span>Create free Team</span>
+          </li>
+        </ol>
+      </ol>
     </Side>
   );
 };
