@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Answer from '../components/Answer';
+import AnswerContainer from '../components/AnswerContainer';
+import AnswerContent from '../components/AnswerContent';
 import Aside from '../components/Aside';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import QuestionContent from '../components/QuestionContent';
 import SideBar from '../components/SideBar';
 
 const Container = styled.div`
@@ -83,11 +86,11 @@ const ReadQuestion = () => {
               <span>View 39 times</span>
             </div>
             <div className="content">
-              <div className="questioncontent">
-                <div>숫자</div>
-                <div className="">ddddd</div>
-              </div>
-              <div className="questionanswer">답변</div>
+              <QuestionContent />
+              {/* <div className="questionanswer">답변</div> */}
+              <AnswerContainer>
+                <AnswerContent />
+              </AnswerContainer>
               <Answer />
               <Aside />
             </div>
