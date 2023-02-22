@@ -4,13 +4,13 @@ const RightAside = styled.aside`
   display: flex;
   /* -webkit-box-pack: end; */
   justify-content: flex-end;
-  margin-right: 3%;
-  /* width: 100%; */
+  width: 100%;
   min-width: 300px;
   text-align: left;
   top: 60px;
   position: relative;
   right: 5px;
+  margin-left: 10px;
   ul {
     border: 1px solid rgb(234, 215, 146);
     border-radius: 3px;
