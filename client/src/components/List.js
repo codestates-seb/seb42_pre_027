@@ -4,8 +4,7 @@ const QuestionList = styled.div`
   display: flex;
   width: 100%;
   max-width: 800px;
-  border-style: solid;
-  border-color: #c5c5c5;
+  border: 1px solid #c5c5c5;
   /* border-width: 1px 0px 0px; */
   float: right;
   height: max-content;
@@ -78,3 +77,15 @@ const List = () => {
 };
 
 export default List;
+
+/* TODO:
+1. 기본 구조 적용 * 
+2. styled-components 적용
+3. 데이터 불러오기
+3-1. data.title
+3-2. data.content
+3-3. data.createdAt
+3-4. data.username
+3-5. data.아이콘?
+3-6. data.answerLength
+*/
