@@ -1,17 +1,9 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { api } from '../util/api';
-
-/* list-style: disc */
-
-// const CreateBox = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   background-color: #f8f9f9;
-// `;
 
 const Content = styled.main`
   width: 100%;
@@ -133,49 +125,40 @@ const ContentBox = styled.section`
 
 const CreateQuestion = () => {
   const navigate = useNavigate();
-  const [titleValue, setTitleValue] = useState('');
-  const [contentValue, setContentValue] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
-  const addQuestion = async (text) => {
-    if (text === '') {
-      return alert('입력은 필수입니다!');
-    } else {
-      const res = await api.post({
-        url: `http://localhost8080/questions`,
-        body: { titleValue, contentValue },
-      });
-      if (res.status === 200 || res.status === 201) {
-        console.log('ok');
-      } else {
-        console.log('fail');
-      }
-    }
-  };
+  const url = '/questions';
 
   const handleTitleOnChange = (e) => {
     // 제목 핸들러함수
-    setTitleValue(e.target.value);
+    setTitle(e.target.value);
     console.log(e.target.value);
   };
 
   const handleContentOnChange = (e) => {
     // 내용 핸들러함수
-    setContentValue(e.target.value);
+    setContent(e.target.value);
     console.log(e.target.value);
   };
 
-  const goToReadQuestion = () => {
-    navigate('/readquestion');
+  const handSubmit = () => {
+    console.log(title);
+    console.log(content);
+    axios
+      .post(url, {
+        title,
+        content,
+      })
+      .then((res) => {
+        navigate('/readquestion');
+      })
+      .catch((err) => console.log(err));
+    alert('작성되었습니다.');
   };
 
-  const handSubmit = (e) => {
-    e.preventDefault();
-    console.log(titleValue);
-    console.log(contentValue);
-    addQuestion(); /* 보낼 데이터 추가작성 */
-    setTitleValue('');
-    setContentValue('');
-  };
+  console.log(title);
+  console.log(content);
 
   return (
     <>
@@ -217,7 +200,7 @@ const CreateQuestion = () => {
             </p>
             <input
               placeholder="e.g. Is there on R function for finding index of an element in a vertor?"
-              value={titleValue}
+              value={title}
               onChange={handleTitleOnChange}
             ></input>
           </div>
@@ -228,15 +211,11 @@ const CreateQuestion = () => {
               Minimum 20 characters.
             </p>
             <textarea
-              value={contentValue}
+              value={content}
               onChange={handleContentOnChange}
             ></textarea>
           </div>
-          <button
-            type="submit"
-            onClick={goToReadQuestion}
-            onSubmit={handSubmit}
-          >
+          <button type="submit" onClick={handSubmit}>
             Review your question
           </button>
         </ContentBox>
