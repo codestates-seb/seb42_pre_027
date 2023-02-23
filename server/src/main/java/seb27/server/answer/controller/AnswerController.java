@@ -32,6 +32,7 @@ public class AnswerController {
         result.setUserId(createAnswer.getMember().getId());
         result.setUsername(createAnswer.getMember().getUsername());
 
+
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 

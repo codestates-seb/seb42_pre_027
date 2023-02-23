@@ -5,6 +5,8 @@ import seb27.server.answer.entity.Answer;
 import seb27.server.answer.repository.AnswerRepository;
 import seb27.server.member.entity.Member;
 import seb27.server.member.repository.MemberRepository;
+import seb27.server.question.Question;
+import seb27.server.question.QuestionRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,15 +17,19 @@ import java.util.Optional;
 public class AnswerService {
     private final AnswerRepository answerRepository;
     private final MemberRepository memberRepository;
+    private final QuestionRepository questionRepository;
 
-    public AnswerService(AnswerRepository answerRepository, MemberRepository memberRepository) {
+    public AnswerService(AnswerRepository answerRepository, MemberRepository memberRepository, QuestionRepository questionRepository) {
         this.answerRepository = answerRepository;
         this.memberRepository = memberRepository;
+        this.questionRepository = questionRepository;
     }
 
-    public Answer createAnswer(Answer answer, long userId) {
+    public Answer createAnswer(Answer answer, long userId, long questionId) {
         Member findMember = getMemberFromId(userId);
+        Question findQuestion = getQuestionFromId(questionId);
         answer.setMember(findMember);
+        answer.setQuestion(findQuestion);
         return answerRepository.save(answer);
     }
 
@@ -56,6 +62,10 @@ public class AnswerService {
 
     public Member getMemberFromId(long memberId) {
         return memberRepository.findById(memberId).get();
+    }
+
+    public Question getQuestionFromId(long questionId) {
+        return questionRepository.findById(questionId).get();
     }
 
 }
