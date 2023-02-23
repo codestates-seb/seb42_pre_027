@@ -1,6 +1,9 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { api } from '../util/api';
 
 /* list-style: disc */
 
@@ -123,10 +126,57 @@ const ContentBox = styled.section`
     color: white;
     background-color: hsl(206, 100%, 52%);
     margin-top: 20px;
+    padding: 10px;
+    border-radius: 3px;
   }
 `;
 
 const CreateQuestion = () => {
+  const navigate = useNavigate();
+  const [titleValue, setTitleValue] = useState('');
+  const [contentValue, setContentValue] = useState('');
+
+  const addQuestion = async (text) => {
+    if (text === '') {
+      return alert('입력은 필수입니다!');
+    } else {
+      const res = await api.post({
+        url: `http://localhost8080/questions`,
+        body: { titleValue, contentValue },
+      });
+      if (res.status === 200 || res.status === 201) {
+        console.log('ok');
+      } else {
+        console.log('fail');
+      }
+    }
+  };
+
+  const handleTitleOnChange = (e) => {
+    // 제목 핸들러함수
+    setTitleValue(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleContentOnChange = (e) => {
+    // 내용 핸들러함수
+    setContentValue(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const goToReadQuestion = () => {
+    navigate('/readquestion');
+  };
+
+  const handSubmit = (e) => {
+    e.preventDefault();
+    console.log(titleValue);
+    console.log(contentValue);
+    addQuestion(); /* 보낼 데이터 추가작성 */
+    setTitleValue('');
+    setContentValue('');
+  };
+
   return (
     <>
       <Header />
@@ -158,14 +208,18 @@ const CreateQuestion = () => {
             </PList>
           </div>
         </TitleBox>
-        <ContentBox>
+        <ContentBox onSubmit={handSubmit}>
           <div className="titlebox">
             <div className="title">Title</div>
             <p>
               Be specific and imagine you’re asking a question to another
               person.
             </p>
-            <input placeholder="e.g. Is there on R function for finding index of an element in a vertor?"></input>
+            <input
+              placeholder="e.g. Is there on R function for finding index of an element in a vertor?"
+              value={titleValue}
+              onChange={handleTitleOnChange}
+            ></input>
           </div>
           <div className="content">
             <div className="title">What are the details of your problem?</div>
@@ -173,9 +227,18 @@ const CreateQuestion = () => {
               Introduce the problem and expand on what you put in the title.
               Minimum 20 characters.
             </p>
-            <textarea></textarea>
+            <textarea
+              value={contentValue}
+              onChange={handleContentOnChange}
+            ></textarea>
           </div>
-          <button>Review your question</button>
+          <button
+            type="submit"
+            onClick={goToReadQuestion}
+            onSubmit={handSubmit}
+          >
+            Review your question
+          </button>
         </ContentBox>
       </Content>
       <Footer />
@@ -189,6 +252,7 @@ export default CreateQuestion;
 1. 기본 구조 구현 * 
 2. styled-components 적용
 3. input 창 구현 * 
-4. input value 구현
+4. input value 구현 * 
 5. input 창 클릭 시 옆에 modal 구현
+6. POST 요청 보내기
 */

@@ -12,7 +12,7 @@ const Side = styled.div`
   display: flex;
   /* border-right: 3px solid #f48023; */
   border-right: 1px solid rgb(181, 181, 181);
-  position: relative;
+  position: sticky;
   padding-top: 24px;
   * {
     list-style: none;
