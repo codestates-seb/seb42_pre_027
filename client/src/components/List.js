@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const QuestionList = styled.div`
@@ -51,7 +52,7 @@ const QuestionContent = styled.div`
   }
 `;
 
-const List = () => {
+const List = ({ questions }) => {
   return (
     <QuestionList>
       <QuestionSide>
@@ -59,9 +60,11 @@ const List = () => {
         <p>0 answers</p>
         <p>39 views</p>
       </QuestionSide>
-      <QuestionContent>
-        <div>title</div>
-        <div>content</div>
+      <QuestionContent questions={questions}>
+        <div>
+          <Link to="/readquestion">{questions.title}</Link>
+        </div>
+        <div>{questions.content}</div>
         <div className="write">
           <div className="writerinfo">
             <div className="iconwrapper">
