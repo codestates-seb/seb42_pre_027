@@ -1,8 +1,12 @@
+import Answer from './Answer';
+import AnswerContent from './AnswerContent';
+
 const AnswerContainer = () => {
   return (
-    <>
-      <div></div>
-    </>
+    <div>
+      <AnswerContent />
+      <Answer />
+    </div>
   );
 };
 
