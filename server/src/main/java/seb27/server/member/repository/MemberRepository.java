@@ -1,4 +1,7 @@
 package seb27.server.member.repository;
 
-public interface MemberRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import seb27.server.member.entity.Member;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
 }

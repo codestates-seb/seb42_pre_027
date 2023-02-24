@@ -21,4 +21,7 @@ public class AnswerPostDto {
 
     @NotBlank
     String content;
+
+    @NotBlank
+    String username;
 }
