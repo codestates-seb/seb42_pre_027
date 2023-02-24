@@ -1,12 +1,17 @@
 package seb27.server.question;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import seb27.server.answer.entity.Answer;
+import seb27.server.member.entity.Member;
 import seb27.server.question.audit.Auditable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,9 +24,6 @@ public class Question extends Auditable {
     private Long id;
 
     @Column(nullable = false)
-    private Long userId;
-
-    @Column(nullable = false)
     private String title;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -30,4 +32,12 @@ public class Question extends Auditable {
 
     private Long answerCount;
     private Long viewCount;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private List<Answer> answers = new ArrayList<>();
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "USER_ID")
+    private Member member;
 }

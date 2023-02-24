@@ -10,39 +10,46 @@ import java.util.List;
 @RequestMapping("/questions")
 public class QuestionController {
     private final QuestionService questionService;
-    private final QuestionMapper questionMapper;
+    private final CustomQuestionMapper customQuestionMapper;
 
-    public QuestionController(QuestionService questionService, QuestionMapper questionMapper) {
+    public QuestionController(QuestionService questionService, CustomQuestionMapper customQuestionMapper) {
         this.questionService = questionService;
-        this.questionMapper = questionMapper;
+        this.customQuestionMapper = customQuestionMapper;
     }
+
 
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionDto.Post postDto){
-        Question createdQuestion = questionService.createQuestion(questionMapper.questionPostDtoToQuestion(postDto));
-        QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(createdQuestion);
+        Question createdQuestion = questionService.createQuestion(customQuestionMapper.questionPostDtoToQuestion(postDto), postDto.getUserId());
+
+        System.out.println(createdQuestion.getId());
+
+        QuestionDto.Response result = customQuestionMapper.questionToQuestionResponseDto(createdQuestion);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity getQuestions(){
         List<Question> questions = questionService.findAllQuestion();
-        return new ResponseEntity<>(questions, HttpStatus.OK);
+        List<QuestionDto.Response> results = customQuestionMapper.questionsToQuestionResponseDtos(questions);
+        return new ResponseEntity<>(results, HttpStatus.OK);
     }
 
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") long questionId){
-        Question question = questionService.findQuestion(questionId);
-        QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(question);
+        Question question = questionService.readQuestion(questionId);
+        QuestionDto.Response result = customQuestionMapper.questionToQuestionResponseDto(question);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@PathVariable("question-id") long questionId,
                                         @RequestBody QuestionDto.Patch patchDto){
-        Question question = questionMapper.questionPatchDtoToQuestion(patchDto);
+        Question question = customQuestionMapper.questionPatchDtoToQuestion(patchDto);
         question.setId(questionId);
-        QuestionDto.Response result = questionMapper.questionToQuestionResponseDto(questionService.updateQuestion(question));
+
+        Question resultQuestion = questionService.updateQuestion(question);
+        QuestionDto.Response result = customQuestionMapper.questionToQuestionResponseDto(resultQuestion);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
