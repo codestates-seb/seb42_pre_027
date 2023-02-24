@@ -1,5 +1,6 @@
 package seb27.server.answer.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Answer extends Auditable {
     private String content;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 

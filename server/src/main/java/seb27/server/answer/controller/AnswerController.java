@@ -27,7 +27,7 @@ public class AnswerController {
     public ResponseEntity postAnswer(@PathVariable("question-id") long questionId,
                                      @RequestBody AnswerPostDto postDto) {
 
-        Answer createAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto), postDto.getUserId());
+        Answer createAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto), postDto.getUserId(),postDto.getQuestionId());
         AnswerResponseDto result = answerMapper.answerToAnswerResponseDto(createAnswer);
         result.setUserId(createAnswer.getMember().getId());
         result.setUsername(createAnswer.getMember().getUsername());

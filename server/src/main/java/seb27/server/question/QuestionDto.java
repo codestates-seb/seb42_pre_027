@@ -3,6 +3,7 @@ package seb27.server.question;
 import lombok.Getter;
 import lombok.Setter;
 import seb27.server.answer.dto.AnswerResponseDto;
+import seb27.server.answer.entity.Answer;
 
 import java.time.LocalDateTime;
 import java.util.List;

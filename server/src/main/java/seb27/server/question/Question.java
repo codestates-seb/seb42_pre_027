@@ -1,5 +1,6 @@
 package seb27.server.question;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,8 @@ public class Question extends Auditable {
     private Long answerCount;
     private Long viewCount;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    @JsonBackReference
     private List<Answer> answers = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.PERSIST)
