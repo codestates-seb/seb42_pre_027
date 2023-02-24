@@ -1,8 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Answer from '../components/Answer';
-import AnswerContainer from '../components/AnswerContainer';
-import AnswerContent from '../components/AnswerContent';
 import Aside from '../components/Aside';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -29,7 +28,6 @@ const Content = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-direction: column;
   width: 90%;
   padding: 24px;
   .top {
@@ -87,9 +85,20 @@ const Content = styled.section`
 
 const ReadQuestion = () => {
   const navigate = useNavigate();
-  const goToCreateQuestion = () => {
-    navigate('/createquestion');
-  };
+  const params = useParams();
+  const [detail, setDetail] = useState({});
+  // const goToCreateQuestion = () => {
+  //   navigate('/createquestion');
+  // };
+  useEffect(() => {
+    const { id } = params;
+    axios
+      .get(`/questions/${id}`)
+      .then((res) => setDetail(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(params.id);
+  console.log(detail);
   return (
     <>
       <Header />
@@ -97,7 +106,7 @@ const ReadQuestion = () => {
         <SideBar />
         <MainQuestion>
           <Content>
-            <div className="top">
+            {/* <div className="top">
               <div className="qtitle">title</div>
               <button id="create-btn" onClick={goToCreateQuestion}>
                 Ask Question
@@ -107,18 +116,18 @@ const ReadQuestion = () => {
               <span>Asked 3 days ago</span>
               <span>Modified today</span>
               <span>View 39 times</span>
-            </div>
+            </div> */}
             <section className="section-content">
               <div className="content">
-                <QuestionContent />
+                <QuestionContent detail={detail} setDetail={setDetail} />
                 {/* <div className="questionanswer">답변</div> */}
-                <AnswerContainer>
+                {/* <AnswerContainer>
                   <AnswerContent />
                 </AnswerContainer>
-                <Answer />
+                <Answer /> */}
               </div>
-              <Aside />
             </section>
+            <Aside />
           </Content>
         </MainQuestion>
       </Container>
@@ -130,7 +139,7 @@ const ReadQuestion = () => {
 export default ReadQuestion;
 
 /* TODO: 
-1. 기본 구조 구현
+1. 기본 구조 구현 * 
 2. 질문 렌더링 (DB에서 데이터 가져와서 렌더링)
 2-1. data.title
 2-2. data.content

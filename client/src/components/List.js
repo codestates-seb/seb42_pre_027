@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const QuestionList = styled.div`
@@ -49,9 +52,28 @@ const QuestionContent = styled.div`
       padding-top: 3px;
     }
   }
+  .detail-content {
+    cursor: pointer;
+  }
+  #content-size {
+    font-size: 0.8em;
+  }
 `;
 
-const List = () => {
+const List = ({ questions }) => {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const moveRead = (id) => {
+    axios
+      .get(`/questions/${questions.id}`)
+      .then((res) => {
+        console.log(res.data.content);
+        setContent(res.data.content);
+      })
+      .catch((err) => console.log(err));
+    navigate(`/readquestion/${questions.id}`);
+  };
   return (
     <QuestionList>
       <QuestionSide>
@@ -59,16 +81,26 @@ const List = () => {
         <p>0 answers</p>
         <p>39 views</p>
       </QuestionSide>
-      <QuestionContent>
-        <div>title</div>
-        <div>content</div>
+      <QuestionContent questions={questions}>
+        <div
+          className="detail-content"
+          onClick={moveRead}
+          title={title}
+          content={content}
+        >
+          {questions.title}
+        </div>
+        <div
+          id="content-size"
+          dangerouslySetInnerHTML={{ __html: questions.content }}
+        />
         <div className="write">
           <div className="writerinfo">
             <div className="iconwrapper">
               <div>icon</div>
             </div>
-            <div className="writer">writer</div>
-            <div className="createat">createat</div>
+            <div className="writer">{questions.userId}</div>
+            <div className="createat">{questions.createdAt}</div>
           </div>
         </div>
       </QuestionContent>

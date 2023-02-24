@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import List from '../components/List';
 
@@ -9,14 +12,28 @@ const Container = styled.main`
 `;
 
 const ListContainer = () => {
+  const [data, setData] = useState([]);
+  const url = '/questions';
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((json) => {
+        setData(json.data);
+        console.log(json.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <Container>
         {/* map 사용하여 데이터 뿌려줄 부분 */}
-        <List />
-        <List />
-        <List />
-        <List />
+        {data.map((questions) => (
+          <List key={questions.id} questions={questions}>
+            <Link to={`/readquestion/${data.id}`} />
+          </List>
+        ))}
       </Container>
     </>
   );
@@ -26,6 +43,6 @@ export default ListContainer;
 
 /* TODO:
 1. 기본 구조 구현 * 
-2. map 으로 질문 리스트 뿌려주기
-3. styled-components 적용
+2. map 으로 질문 리스트 뿌려주기 * 
+3. styled-components 적용 
 */
