@@ -1,5 +1,8 @@
 package seb27.server.question;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import seb27.server.member.entity.Member;
 import seb27.server.member.repository.MemberRepository;
@@ -52,8 +55,8 @@ public class QuestionService {
         return questionRepository.findById(id).orElse(null);
     }
 
-    public List<Question> findAllQuestion(){
-        return questionRepository.findAll();
+    public Page<Question> findAllQuestion(int page, int size){
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
     }
 
     public Member getMemberFromId(long memberId){

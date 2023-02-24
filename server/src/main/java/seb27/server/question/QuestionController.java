@@ -1,9 +1,11 @@
 package seb27.server.question;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -27,8 +29,10 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getQuestions(){
-        List<Question> questions = questionService.findAllQuestion();
+    public ResponseEntity getQuestions(@Positive @RequestParam int page,
+                                       @Positive @RequestParam int size){
+        Page<Question> pageQuestions = questionService.findAllQuestion(page-1, size);
+        List<Question> questions = pageQuestions.getContent();
         List<QuestionDto.Response> results = customQuestionMapper.questionsToQuestionResponseDtos(questions);
         return new ResponseEntity<>(results, HttpStatus.OK);
     }
