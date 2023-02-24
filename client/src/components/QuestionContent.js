@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as DownLogo } from '../svg/svg-down.svg';
@@ -54,19 +55,28 @@ const MainContent = styled.main`
 const QuestionContent = ({ detail, setDetail }) => {
   const navigate = useNavigate();
 
-  // const onRemove = (id) => {
-  //   axios
-  //     .delete(`/questions${questions.id}`)
-  //     .then()
-  //     .catch((err) => console.log(err));
-  // };
+  const goToUpdate = () => {
+    navigate(`/updatequestions/${detail.id}`);
+  };
+
   const goToCreateQuestion = () => {
     navigate('/createquestion');
   };
+
+  const onDelete = () => {
+    axios
+      .delete(`/questions/${detail.id}`)
+      .then((res) => {
+        alert('삭제되었습니다.');
+        navigate('/main');
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <MainContent>
       <div className="top">
-        <div className="qtitle">title</div>
+        <div className="qtitle">{detail.title}</div>
         <button id="create-btn" onClick={goToCreateQuestion}>
           Ask Question
         </button>
@@ -93,10 +103,16 @@ const QuestionContent = ({ detail, setDetail }) => {
           ></div>
           <div className="contentfooter">
             <div className="btn-wrapper">
-              <button>update</button>
-              <button>delete</button>
+              <button
+                onClick={goToUpdate}
+                detail={detail}
+                setDetail={setDetail}
+              >
+                update
+              </button>
+              <button onClick={onDelete}>delete</button>
             </div>
-            <div>writer</div>
+            <div>{detail.username}</div>
           </div>
         </section>
       </section>
