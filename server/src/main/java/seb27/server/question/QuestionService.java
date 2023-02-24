@@ -22,6 +22,8 @@ public class QuestionService {
     public Question createQuestion(Question question, long userId){
         Member findMember = getMemberFromId(userId);
         question.setMember(findMember);
+        question.setViewCount(0L);
+        question.setAnswerCount(0L);
         return questionRepository.save(question);
     }
 
@@ -34,6 +36,12 @@ public class QuestionService {
 
         findQuestion.setModifiedAt(LocalDateTime.now());
         return questionRepository.save(findQuestion);
+    }
+
+    public Question readQuestion(long id){
+        Question question = findQuestion(id);
+        question.setViewCount(question.getViewCount()+1);
+        return questionRepository.save(question);
     }
 
     public void deleteQuestion(long id){
