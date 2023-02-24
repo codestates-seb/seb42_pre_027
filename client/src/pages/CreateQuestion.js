@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -86,6 +87,24 @@ const ContentBox = styled.section`
       padding: 5px;
     }
   }
+  .ql-container {
+    box-sizing: border-box;
+    font-family: 'Gowun Batang';
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #565759;
+    min-height: 15rem;
+    margin: 0px;
+    position: relative;
+  }
+  .ql-editor {
+    min-height: 15rem;
+  }
+  @media screen and (max-width: 600px) {
+    .ql-container {
+      font-size: 1.125rem;
+    }
+  }
   .title {
     font-weight: 600;
     font-size: 1.15rem;
@@ -104,17 +123,8 @@ const ContentBox = styled.section`
     min-width: 400px;
     width: 80%;
     margin-top: 20px;
-    textarea {
-      max-height: calc(var(--s-step) * 6);
-      border: 1px solid hsl(210, 8%, 90%);
-      border-radius: 4px;
-      /* height: 300px; */
-      margin-top: 10px;
-      width: 100%;
-      padding: 5px;
-    }
   }
-  button {
+  > button {
     color: white;
     background-color: hsl(206, 100%, 52%);
     margin-top: 20px;
@@ -123,10 +133,36 @@ const ContentBox = styled.section`
   }
 `;
 
-const CreateQuestion = () => {
+const CreateQuestion = ({ title, setTitle, content, setContent }) => {
+  const modules = {
+    toolbar: {
+      container: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ font: [] }],
+        [{ align: [] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ list: 'ordered' }, { list: 'bullet' }, 'link'],
+        [
+          {
+            color: [
+              '#000000',
+              '#e60000',
+              '#ff9900',
+              '#ffff00',
+              '#008a00',
+              '#0066cc',
+              '#9933ff',
+              'custom-color',
+            ],
+          },
+          { background: [] },
+        ],
+        ['image', 'video'],
+        ['clean'],
+      ],
+    },
+  };
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
 
   const url = '/questions';
 
@@ -138,27 +174,23 @@ const CreateQuestion = () => {
 
   const handleContentOnChange = (e) => {
     // 내용 핸들러함수
-    setContent(e.target.value);
-    console.log(e.target.value);
+    setContent(e);
+    console.log(e);
   };
 
   const handSubmit = () => {
-    console.log(title);
-    console.log(content);
     axios
       .post(url, {
         title,
         content,
       })
       .then((res) => {
-        navigate('/readquestion');
+        console.log(res);
+        navigate(`/readquestion/${res.data.id}`);
       })
       .catch((err) => console.log(err));
     alert('작성되었습니다.');
   };
-
-  console.log(title);
-  console.log(content);
 
   return (
     <>
@@ -210,10 +242,11 @@ const CreateQuestion = () => {
               Introduce the problem and expand on what you put in the title.
               Minimum 20 characters.
             </p>
-            <textarea
+            <ReactQuill
+              modules={modules}
               value={content}
               onChange={handleContentOnChange}
-            ></textarea>
+            ></ReactQuill>
           </div>
           <button type="submit" onClick={handSubmit}>
             Review your question

@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import Aside from '../components/Aside';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import ListContainer from '../components/ListContainer';
 import SideBar from '../components/SideBar';
 
 import { useNavigate } from 'react-router-dom';
-import ListContainer from '../components/ListContainer';
 
 const Container = styled.div`
   width: 100%;
@@ -19,12 +19,13 @@ const Container = styled.div`
 `;
 
 const MainPage = styled.main`
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   width: 100%;
   max-width: 1100px;
   align-items: flex-start;
-  padding-top: 60px;
+  margin-top: 60px;
+  margin-bottom: 60px;
   > section {
     display: flex;
     width: 100%;
