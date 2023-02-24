@@ -1,19 +1,21 @@
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as ExploreLogo } from '../svg/explorelogo.svg';
 
-const Side = styled.div`
+const Side = styled.nav`
   background-color: white;
   width: 164px;
   /* height: 100%; */
-  z-index: 20;
   /* top: 30px; */
   text-align: left;
-  display: flex;
+  /* display: flex; */
   /* border-right: 3px solid #f48023; */
   border-right: 1px solid rgb(181, 181, 181);
   position: sticky;
   padding-top: 24px;
+  font-size: 0.85em;
+  .fix {
+    width: 164px;
+  }
   * {
     list-style: none;
   }
@@ -26,6 +28,9 @@ const Side = styled.div`
   .nav-links {
     li:not(:first-child) {
       margin-bottom: 15px;
+      padding-left: 5px;
+      > li {
+      }
     }
   }
   span {
@@ -35,68 +40,73 @@ const Side = styled.div`
     margin-top: 7.5px;
     margin-bottom: 7.5px;
   }
-  #home {
-    font-size: 0.85em;
-    padding-left: 5px;
-  }
-  .content {
+  #home,
+  #main {
     display: flex;
-    width: 164px;
-    height: 35px;
-    > a {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      text-decoration: none;
-      /* 글씨색 수정 */
-      color: black;
-      width: 100%;
-      height: 100%;
-      &:focus {
-        background-color: #f1f2f3;
-        border-right: 3px solid #f48023;
-        font-weight: 700;
-      }
-    }
+    align-items: center;
+    padding-left: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .orange {
+    display: flex;
+    background-color: #f1f2f3;
+    border-right: 3px solid #f48023;
+    font-weight: bold;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 `;
 
 const SideBar = () => {
+  const navigate = useNavigate();
+  const currentPage = useLocation().pathname;
   return (
     <Side>
-      <ol className="nav-links">
-        <li id="home" className="content">
-          <Link to="/main">Home</Link>
-        </li>
+      <div className="fix">
         <ol className="nav-links">
-          <li className="nav-menu">PUBLIC</li>
-          <li className="content">
-            <Link to="/main">
-              <span>Question</span>
-            </Link>
+          <li
+            id="home"
+            className={currentPage === '/' ? 'orange' : null}
+            onClick={() => navigate('/main')}
+          >
+            Home
           </li>
-          <li>
-            <span>Tags</span>
-          </li>
-          <li>
-            <span>User</span>
-          </li>
-          <li>
-            <span>Companies</span>
-          </li>
-          <li className="nav-menu">COLLECTIVES</li>
-          <li>
-            <ExploreLogo />
-            <span>Explore Collectives</span>
-          </li>
+          <ol className="nav-links">
+            <li className="nav-menu">PUBLIC</li>
+            <li
+              id="main"
+              className={currentPage === '/main' ? 'orange' : null}
+              onClick={() => navigate('/main')}
+            >
+              Question
+            </li>
+            <li>
+              <span>Tags</span>
+            </li>
+            <li>
+              <span>User</span>
+            </li>
+            <li>
+              <span>Companies</span>
+            </li>
+            <li className="nav-menu">COLLECTIVES</li>
+            {/* <li>
+              <ExploreLogo />
+              <span>Explore Collectives</span>
+            </li> */}
+          </ol>
+          <ol>
+            <li className="nav-menu">TEAMS</li>
+            <li>
+              <span>Create free Team</span>
+            </li>
+          </ol>
         </ol>
-        <ol>
-          <li className="nav-menu">TEAMS</li>
-          <li>
-            <span>Create free Team</span>
-          </li>
-        </ol>
-      </ol>
+      </div>
     </Side>
   );
 };
