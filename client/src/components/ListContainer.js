@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import List from '../components/List';
 
@@ -29,7 +30,9 @@ const ListContainer = () => {
       <Container>
         {/* map 사용하여 데이터 뿌려줄 부분 */}
         {data.map((questions) => (
-          <List key={questions.id} questions={questions} />
+          <List key={questions.id} questions={questions}>
+            <Link to={`/readquestion/${data.id}`} />
+          </List>
         ))}
       </Container>
     </>

@@ -51,7 +51,7 @@ const MainContent = styled.main`
   }
 `;
 
-const QuestionContent = ({ title, content }) => {
+const QuestionContent = ({ detail, setDetail }) => {
   const navigate = useNavigate();
 
   // const onRemove = (id) => {
@@ -87,7 +87,10 @@ const QuestionContent = ({ title, content }) => {
           </div>
         </div>
         <section className="qcontent">
-          <div className="question">{content}</div>
+          <div
+            className="question"
+            dangerouslySetInnerHTML={{ __html: detail.content }}
+          ></div>
           <div className="contentfooter">
             <div className="btn-wrapper">
               <button>update</button>

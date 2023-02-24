@@ -52,6 +52,12 @@ const QuestionContent = styled.div`
       padding-top: 3px;
     }
   }
+  .detail-content {
+    cursor: pointer;
+  }
+  #content-size {
+    font-size: 0.8em;
+  }
 `;
 
 const List = ({ questions }) => {
@@ -66,7 +72,7 @@ const List = ({ questions }) => {
         setContent(res.data.content);
       })
       .catch((err) => console.log(err));
-    navigate('/readquestion');
+    navigate(`/readquestion/${questions.id}`);
   };
   return (
     <QuestionList>
@@ -76,10 +82,18 @@ const List = ({ questions }) => {
         <p>39 views</p>
       </QuestionSide>
       <QuestionContent questions={questions}>
-        <div onClick={moveRead} title={title} content={content}>
+        <div
+          className="detail-content"
+          onClick={moveRead}
+          title={title}
+          content={content}
+        >
           {questions.title}
         </div>
-        <div>{questions.content}</div>
+        <div
+          id="content-size"
+          dangerouslySetInnerHTML={{ __html: questions.content }}
+        />
         <div className="write">
           <div className="writerinfo">
             <div className="iconwrapper">
