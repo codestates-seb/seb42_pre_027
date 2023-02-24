@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const QuestionList = styled.div`
@@ -53,6 +55,19 @@ const QuestionContent = styled.div`
 `;
 
 const List = ({ questions }) => {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const moveRead = (id) => {
+    axios
+      .get(`/questions/${questions.id}`)
+      .then((res) => {
+        console.log(res.data.content);
+        setContent(res.data.content);
+      })
+      .catch((err) => console.log(err));
+    navigate('/readquestion');
+  };
   return (
     <QuestionList>
       <QuestionSide>
@@ -61,8 +76,8 @@ const List = ({ questions }) => {
         <p>39 views</p>
       </QuestionSide>
       <QuestionContent questions={questions}>
-        <div>
-          <Link to="/readquestion">{questions.title}</Link>
+        <div onClick={moveRead} title={title} content={content}>
+          {questions.title}
         </div>
         <div>{questions.content}</div>
         <div className="write">
@@ -70,8 +85,8 @@ const List = ({ questions }) => {
             <div className="iconwrapper">
               <div>icon</div>
             </div>
-            <div className="writer">writer</div>
-            <div className="createat">createat</div>
+            <div className="writer">{questions.userId}</div>
+            <div className="createat">{questions.createdAt}</div>
           </div>
         </div>
       </QuestionContent>
