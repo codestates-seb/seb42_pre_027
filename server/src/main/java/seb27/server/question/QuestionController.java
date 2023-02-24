@@ -22,6 +22,8 @@ public class QuestionController {
     public ResponseEntity postQuestion(@RequestBody QuestionDto.Post postDto){
         Question createdQuestion = questionService.createQuestion(customQuestionMapper.questionPostDtoToQuestion(postDto), postDto.getUserId());
 
+        System.out.println(createdQuestion.getId());
+
         QuestionDto.Response result = customQuestionMapper.questionToQuestionResponseDto(createdQuestion);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }

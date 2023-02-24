@@ -29,6 +29,7 @@ public class QuestionDto {
     @Setter
     @Getter
     public static class Response{
+        long id;
         long userId;
         String username;
         String title;

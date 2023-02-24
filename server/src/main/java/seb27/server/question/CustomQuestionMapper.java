@@ -31,6 +31,7 @@ public class CustomQuestionMapper implements QuestionMapper{
         }
         else{
             QuestionDto.Response response = new QuestionDto.Response();
+            response.setId(question.getId());
             response.setUserId(question.getMember().getId());
             response.setUsername(question.getMember().getUsername());
             response.setTitle(question.getTitle());
