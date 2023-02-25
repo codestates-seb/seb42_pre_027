@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -133,14 +134,7 @@ const ContentBox = styled.section`
   }
 `;
 
-const UpdateQuestion = ({
-  detail,
-  setDetail,
-  title,
-  setTitle,
-  content,
-  setContent,
-}) => {
+const UpdateQuestion = ({ title, setTitle, content, setContent }) => {
   const modules = {
     toolbar: {
       container: [
@@ -170,36 +164,48 @@ const UpdateQuestion = ({
     },
   };
   const navigate = useNavigate();
-
-  const url = `/questions/${detail.id}`;
+  const params = useParams();
+  const [updateTitle, setUpdateTitle] = useState('');
+  const [updateContent, setUpdateContent] = useState('');
 
   const handleTitleOnChange = (e) => {
     // 제목 핸들러함수
-    setTitle(e.target.value);
-    console.log(e.target.value);
+    setUpdateTitle(e.target.value);
   };
 
   const handleContentOnChange = (e) => {
     // 내용 핸들러함수
-    setContent(e);
-    console.log(e);
+    setUpdateContent(e);
   };
 
-  /* POST 요청 시, userId 포함 */
-  const handSubmit = () => {
+  useEffect(() => {
+    const { id } = params;
     axios
-      .patch(url, {
-        title: detail.title,
-        content: detail.content,
+      .get(`/questions/${id}`)
+      .then((res) => {
+        setUpdateTitle(res.data.title);
+        setUpdateContent(res.data.content);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  console.log(updateTitle);
+  console.log(updateContent);
+
+  const handSubmit = () => {
+    const { id } = params;
+    axios
+      .patch(`/questions/${id}`, {
+        title: updateTitle,
+        content: updateContent,
       })
       .then((res) => {
         console.log(res);
-        navigate(`/readquestion/${res.data.id}`);
+        navigate(`/readquestion/${id}`);
       })
       .catch((err) => console.log(err));
     alert('수정되었습니다.');
   };
-
   return (
     <>
       <Header />
@@ -240,11 +246,9 @@ const UpdateQuestion = ({
             </p>
             <input
               placeholder="e.g. Is there on R function for finding index of an element in a vertor?"
-              value={title}
+              value={updateTitle}
               onChange={handleTitleOnChange}
-            >
-              {detail.title}
-            </input>
+            ></input>
           </div>
           <div className="content">
             <div className="title">What are the details of your problem?</div>
@@ -254,7 +258,7 @@ const UpdateQuestion = ({
             </p>
             <ReactQuill
               modules={modules}
-              value={content}
+              value={updateContent}
               onChange={handleContentOnChange}
             ></ReactQuill>
           </div>

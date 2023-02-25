@@ -1,4 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as DownLogo } from '../svg/svg-down.svg';
 import { ReactComponent as UpLogo } from '../svg/svg-up.svg';
@@ -51,22 +53,44 @@ const MainContent = styled.main`
   }
 `;
 
-const QuestionContent = ({ detail, setDetail }) => {
+const QuestionContent = ({ detail }) => {
   const navigate = useNavigate();
+  const params = useParams();
+  const [update, setUpdate] = useState({});
 
-  // const onRemove = (id) => {
-  //   axios
-  //     .delete(`/questions${questions.id}`)
-  //     .then()
-  //     .catch((err) => console.log(err));
-  // };
   const goToCreateQuestion = () => {
     navigate('/createquestion');
   };
+
+  useEffect(() => {
+    const { id } = params;
+    axios
+      .get(`/questions/${id}`)
+      .then((res) => {
+        setUpdate(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const onUpdate = (id) => {
+    navigate(`/updatequestion/${detail.id}`);
+  };
+
+  const onDelete = () => {
+    axios
+      .delete(`/questions/${params.id}`)
+      .then((res) => {
+        alert('삭제되었습니다.');
+        console.log(res);
+        navigate('/main');
+      })
+      .catch((err) => console.log(err));
+  };
+  console.log(update);
   return (
     <MainContent>
       <div className="top">
-        <div className="qtitle">title</div>
+        <div className="qtitle">{detail.title}</div>
         <button id="create-btn" onClick={goToCreateQuestion}>
           Ask Question
         </button>
@@ -93,8 +117,8 @@ const QuestionContent = ({ detail, setDetail }) => {
           ></div>
           <div className="contentfooter">
             <div className="btn-wrapper">
-              <button>update</button>
-              <button>delete</button>
+              <button onClick={onUpdate}>update</button>
+              <button onClick={onDelete}>delete</button>
             </div>
             <div>writer</div>
           </div>
