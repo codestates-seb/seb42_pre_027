@@ -1,7 +1,9 @@
 package seb27.server.question;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import seb27.server.answer.dto.AnswerResponseDto;
 import seb27.server.answer.entity.Answer;
 
@@ -37,7 +39,10 @@ public class QuestionDto {
         String tag;
         long answerCount;
         long viewCount;
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy년 MM월 dd일 HH:mm", timezone = "Asia/Seoul")
         LocalDateTime createdAt;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy년 MM월 dd일 HH:mm", timezone = "Asia/Seoul")
         LocalDateTime modifiedAt;
 
         private List<AnswerResponseDto> answers;

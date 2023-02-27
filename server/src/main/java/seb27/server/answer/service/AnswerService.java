@@ -28,6 +28,7 @@ public class AnswerService {
     public Answer createAnswer(Answer answer, long userId, long questionId) {
         Member findMember = getMemberFromId(userId);
         Question findQuestion = getQuestionFromId(questionId);
+        findQuestion.setAnswerCount(findQuestion.getAnswerCount()+1);
         answer.setMember(findMember);
         answer.setQuestion(findQuestion);
         return answerRepository.save(answer);
@@ -46,7 +47,8 @@ public class AnswerService {
     public void deleteAnswer(long answerId) {
 
         Answer findAnswer = findVerifiedAnswer(answerId);
-
+        Question question = findAnswer.getQuestion();
+        question.setAnswerCount(question.getAnswerCount()-1);
         answerRepository.deleteById(answerId);
 
         //answerRepository.delete(findAnswer);
