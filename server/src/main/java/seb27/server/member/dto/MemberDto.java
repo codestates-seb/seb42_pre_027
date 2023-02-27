@@ -11,7 +11,6 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Post{
-
         @NotNull(message = "ID는 비워둘 수 없습니다.")
         private String username;
 
@@ -23,8 +22,6 @@ public class MemberDto {
     @Setter
     @AllArgsConstructor
     public static class Patch {
-        private long Id;
-
         @NotNull(message = "이름은 비워둘 수 없습니다.")
         private String username;
 
@@ -35,9 +32,9 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private long Id;
+        private long id;
         private String username;
         private String password;
 
     }
-    }
+}

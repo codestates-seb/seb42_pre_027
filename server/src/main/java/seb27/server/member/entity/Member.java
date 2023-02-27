@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Setter
 @Entity
 public class Member {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,4 +24,4 @@ public class Member {
     @Column(length = 30, nullable = false)
     private String password;
 
-    }
+}
