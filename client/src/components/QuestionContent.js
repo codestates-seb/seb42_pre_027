@@ -56,21 +56,20 @@ const MainContent = styled.main`
 const QuestionContent = ({ detail }) => {
   const navigate = useNavigate();
   const params = useParams();
+  const { id } = params;
   const [update, setUpdate] = useState({});
 
   const goToCreateQuestion = () => {
     navigate('/createquestion');
   };
-
   useEffect(() => {
-    const { id } = params;
     axios
       .get(`/questions/${id}`)
       .then((res) => {
         setUpdate(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   const onUpdate = (id) => {
     navigate(`/updatequestion/${detail.id}`);
@@ -86,7 +85,6 @@ const QuestionContent = ({ detail }) => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(update);
   return (
     <MainContent>
       <div className="top">
@@ -120,7 +118,7 @@ const QuestionContent = ({ detail }) => {
               <button onClick={onUpdate}>update</button>
               <button onClick={onDelete}>delete</button>
             </div>
-            <div>writer</div>
+            <div>{detail.username}</div>
           </div>
         </section>
       </section>

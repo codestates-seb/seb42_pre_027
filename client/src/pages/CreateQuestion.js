@@ -90,7 +90,7 @@ const ContentBox = styled.section`
   .ql-container {
     box-sizing: border-box;
     font-family: 'Gowun Batang';
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #565759;
     min-height: 15rem;
@@ -178,11 +178,13 @@ const CreateQuestion = ({ title, setTitle, content, setContent }) => {
     console.log(e);
   };
 
+  /* POST 요청 시, userId 포함 */
   const handSubmit = () => {
     axios
       .post(url, {
         title,
         content,
+        userId: 1,
       })
       .then((res) => {
         console.log(res);
@@ -191,7 +193,6 @@ const CreateQuestion = ({ title, setTitle, content, setContent }) => {
       .catch((err) => console.log(err));
     alert('작성되었습니다.');
   };
-
   return (
     <>
       <Header />
@@ -232,7 +233,6 @@ const CreateQuestion = ({ title, setTitle, content, setContent }) => {
             </p>
             <input
               placeholder="e.g. Is there on R function for finding index of an element in a vertor?"
-              value={title}
               onChange={handleTitleOnChange}
             ></input>
           </div>
@@ -244,7 +244,6 @@ const CreateQuestion = ({ title, setTitle, content, setContent }) => {
             </p>
             <ReactQuill
               modules={modules}
-              value={content}
               onChange={handleContentOnChange}
             ></ReactQuill>
           </div>
