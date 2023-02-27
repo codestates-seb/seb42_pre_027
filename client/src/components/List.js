@@ -54,6 +54,10 @@ const QuestionContent = styled.div`
   }
   .detail-content {
     cursor: pointer;
+    color: #0995ff;
+    &:hover {
+      color: #5ebaff;
+    }
   }
   #content-size {
     font-size: 0.8em;
@@ -68,7 +72,6 @@ const List = ({ questions }) => {
     axios
       .get(`/questions/${questions.id}`)
       .then((res) => {
-        console.log(res.data.content);
         setContent(res.data.content);
       })
       .catch((err) => console.log(err));
@@ -99,7 +102,7 @@ const List = ({ questions }) => {
             <div className="iconwrapper">
               <div>icon</div>
             </div>
-            <div className="writer">{questions.userId}</div>
+            <div className="writer">{questions.username}</div>
             <div className="createat">{questions.createdAt}</div>
           </div>
         </div>
@@ -120,4 +123,5 @@ export default List;
 3-4. data.username
 3-5. data.아이콘?
 3-6. data.answerLength
+4. 제목 hover, color 변경
 */
