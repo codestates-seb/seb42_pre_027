@@ -58,9 +58,16 @@ const QuestionContent = ({ detail }) => {
   const params = useParams();
   const [update, setUpdate] = useState({});
 
+
+  const goToUpdate = () => {
+    navigate(`/updatequestions/${detail.id}`);
+  };
+
+
   const goToCreateQuestion = () => {
     navigate('/createquestion');
   };
+
 
   useEffect(() => {
     const { id } = params;
@@ -76,17 +83,17 @@ const QuestionContent = ({ detail }) => {
     navigate(`/updatequestion/${detail.id}`);
   };
 
+
   const onDelete = () => {
     axios
-      .delete(`/questions/${params.id}`)
+      .delete(`/questions/${detail.id}`)
       .then((res) => {
         alert('삭제되었습니다.');
-        console.log(res);
+
         navigate('/main');
       })
       .catch((err) => console.log(err));
   };
-  console.log(update);
   return (
     <MainContent>
       <div className="top">
@@ -120,7 +127,7 @@ const QuestionContent = ({ detail }) => {
               <button onClick={onUpdate}>update</button>
               <button onClick={onDelete}>delete</button>
             </div>
-            <div>writer</div>
+            <div>{detail.username}</div>
           </div>
         </section>
       </section>
