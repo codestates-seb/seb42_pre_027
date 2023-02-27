@@ -59,6 +59,12 @@ const QuestionContent = ({ detail }) => {
   const { id } = params;
   const [update, setUpdate] = useState({});
 
+
+  const goToUpdate = () => {
+    navigate(`/updatequestions/${detail.id}`);
+  };
+
+
   const goToCreateQuestion = () => {
     navigate('/createquestion');
   };
@@ -75,12 +81,13 @@ const QuestionContent = ({ detail }) => {
     navigate(`/updatequestion/${detail.id}`);
   };
 
+
   const onDelete = () => {
     axios
-      .delete(`/questions/${params.id}`)
+      .delete(`/questions/${detail.id}`)
       .then((res) => {
         alert('삭제되었습니다.');
-        console.log(res);
+
         navigate('/main');
       })
       .catch((err) => console.log(err));
