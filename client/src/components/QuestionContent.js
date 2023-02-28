@@ -70,12 +70,12 @@ const QuestionContent = ({ detail }) => {
     axios
       .get(`${process.env.REACT_APP_SERVER}/questions/${id}`)
       .then((res) => {
-        setUpdate(res.data);
+        setUpdate(res.data.userId);
       })
       .catch((err) => console.log(err));
   }, [id]);
 
-  const onUpdate = (id) => {
+  const onUpdate = () => {
     navigate(`/updatequestion/${detail.id}`);
   };
 
@@ -89,6 +89,7 @@ const QuestionContent = ({ detail }) => {
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <MainContent>
       <div className="top">
@@ -98,7 +99,7 @@ const QuestionContent = ({ detail }) => {
         </button>
       </div>
       <div className="writinginfo">
-        <span>Asked 3 days ago</span>
+        <span>{detail.createdAt}</span>
         <span>Modified today</span>
         <span>View 39 times</span>
       </div>
@@ -119,8 +120,12 @@ const QuestionContent = ({ detail }) => {
           ></div>
           <div className="contentfooter">
             <div className="btn-wrapper">
-              <button onClick={onUpdate}>update</button>
-              <button onClick={onDelete}>delete</button>
+              {Number(localStorage.getItem('id')) === Number(update) ? (
+                <button onClick={onUpdate}>update</button>
+              ) : null}
+              {Number(localStorage.getItem('id')) === Number(update) ? (
+                <button onClick={onDelete}>delete</button>
+              ) : null}
             </div>
             <div>{detail.username}</div>
           </div>
