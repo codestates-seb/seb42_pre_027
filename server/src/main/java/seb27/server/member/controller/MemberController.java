@@ -11,6 +11,7 @@ import seb27.server.member.mapper.MemberMapper;
 import seb27.server.member.service.MemberService;
 
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -31,9 +32,24 @@ public class MemberController {
         return new ResponseEntity<>(createdMember, HttpStatus.CREATED);
     }
 
+    // member 1명 조회
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(@Positive @PathVariable("member-id") long memberId){
         Member member = memberService.findMember(memberId);
         return new ResponseEntity<>(member, HttpStatus.OK);
+    }
+
+    // member 전체 조회
+    @GetMapping
+    public ResponseEntity getMembers(){
+        List<Member> list = memberService.findMembers();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    // member 삭제
+    @DeleteMapping("/{member-id}")
+    public ResponseEntity deleteMember(@Positive @PathVariable("member-id") long memberId){
+        memberService.deleteMember(memberId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

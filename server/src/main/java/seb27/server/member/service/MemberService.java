@@ -4,10 +4,12 @@ import org.springframework.stereotype.Service;
 import seb27.server.member.entity.Member;
 import seb27.server.member.repository.MemberRepository;
 
+import java.util.List;
+
 @Service
 public class MemberService {
-
     private final MemberRepository memberRepository;
+    // private final PasswordEncoder passwordEncoder;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -19,5 +21,11 @@ public class MemberService {
 
     public Member findMember(long memberId){
         return memberRepository.findById(memberId).orElse(null);
+    }
+    public List<Member> findMembers(){
+        return memberRepository.findAll();
+    }
+    public void deleteMember(long memberId){
+        memberRepository.deleteById(memberId);
     }
 }

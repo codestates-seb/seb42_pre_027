@@ -9,7 +9,7 @@ import seb27.server.member.entity.Member;
 @Service
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MemberMapper {
-    Member memberPostToMember(MemberDto.Post requestBody);
-    Member memberPatchToMember(MemberDto.Patch requestBody);
+    Member memberPostToMember(MemberDto.Post postDto);
+    Member memberPatchToMember(MemberDto.Patch patchDto);
     MemberDto.Response memberToMemberResponse(Member member);
 }
