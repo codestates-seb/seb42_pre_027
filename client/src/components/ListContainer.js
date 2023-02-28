@@ -13,14 +13,13 @@ const Container = styled.main`
 
 const ListContainer = () => {
   const [data, setData] = useState([]);
-  const url = '/questions';
+  const url = `${process.env.REACT_APP_SERVER}/questions`;
 
   useEffect(() => {
     axios
       .get(url)
       .then((json) => {
         setData(json.data);
-        console.log(json.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -44,5 +43,5 @@ export default ListContainer;
 /* TODO:
 1. 기본 구조 구현 * 
 2. map 으로 질문 리스트 뿌려주기 * 
-3. styled-components 적용 
+3. styled-components 적용 *
 */

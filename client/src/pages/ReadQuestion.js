@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import AnswerContainer from '../components/AnswerContainer';
 import Aside from '../components/Aside';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -86,19 +87,16 @@ const Content = styled.section`
 const ReadQuestion = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const { id } = params;
   const [detail, setDetail] = useState({});
-  // const goToCreateQuestion = () => {
-  //   navigate('/createquestion');
-  // };
+
   useEffect(() => {
-    const { id } = params;
     axios
-      .get(`/questions/${id}`)
+      .get(`${process.env.REACT_APP_SERVER}/questions/${id}`)
       .then((res) => setDetail(res.data))
       .catch((err) => console.log(err));
   }, []);
-  console.log(params.id);
-  console.log(detail);
+
   return (
     <>
       <Header />
@@ -106,25 +104,10 @@ const ReadQuestion = () => {
         <SideBar />
         <MainQuestion>
           <Content>
-            {/* <div className="top">
-              <div className="qtitle">title</div>
-              <button id="create-btn" onClick={goToCreateQuestion}>
-                Ask Question
-              </button>
-            </div>
-            <div className="writinginfo">
-              <span>Asked 3 days ago</span>
-              <span>Modified today</span>
-              <span>View 39 times</span>
-            </div> */}
             <section className="section-content">
               <div className="content">
                 <QuestionContent detail={detail} setDetail={setDetail} />
-                {/* <div className="questionanswer">답변</div> */}
-                {/* <AnswerContainer>
-                  <AnswerContent />
-                </AnswerContainer>
-                <Answer /> */}
+                <AnswerContainer id={id} />
               </div>
             </section>
             <Aside />
@@ -140,10 +123,10 @@ export default ReadQuestion;
 
 /* TODO: 
 1. 기본 구조 구현 * 
-2. 질문 렌더링 (DB에서 데이터 가져와서 렌더링)
-2-1. data.title
-2-2. data.content
-2-3. data.writer
+2. 질문 렌더링 (DB에서 데이터 가져와서 렌더링) *
+2-1. data.title *
+2-2. data.content *
+2-3. data.writer *
 3. 답변 기능 구현
 3-1. 답변 read
 3-2. 답변 create

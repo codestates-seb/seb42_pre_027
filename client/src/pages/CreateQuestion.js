@@ -164,18 +164,17 @@ const CreateQuestion = ({ title, setTitle, content, setContent }) => {
   };
   const navigate = useNavigate();
 
-  const url = '/questions';
+  const url = `${process.env.REACT_APP_SERVER}/questions`;
+  const userId = localStorage.getItem('id');
 
   const handleTitleOnChange = (e) => {
     // 제목 핸들러함수
     setTitle(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleContentOnChange = (e) => {
     // 내용 핸들러함수
     setContent(e);
-    console.log(e);
   };
 
   /* POST 요청 시, userId 포함 */
@@ -194,10 +193,9 @@ const CreateQuestion = ({ title, setTitle, content, setContent }) => {
           .post(url, {
             title,
             content,
-            userId: 1,
+            userId,
           })
           .then((res) => {
-            console.log(res);
             navigate(`/readquestion/${res.data.id}`);
           })
           .catch((err) => console.log(err));
@@ -273,9 +271,9 @@ export default CreateQuestion;
 
 /* TODO:
 1. 기본 구조 구현 * 
-2. styled-components 적용
+2. styled-components 적용 *
 3. input 창 구현 * 
 4. input value 구현 * 
 5. input 창 클릭 시 옆에 modal 구현
-6. POST 요청 보내기
+6. POST 요청 보내기 *
 */

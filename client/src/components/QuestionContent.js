@@ -59,18 +59,16 @@ const QuestionContent = ({ detail }) => {
   const { id } = params;
   const [update, setUpdate] = useState({});
 
-
   const goToUpdate = () => {
     navigate(`/updatequestions/${detail.id}`);
   };
-
 
   const goToCreateQuestion = () => {
     navigate('/createquestion');
   };
   useEffect(() => {
     axios
-      .get(`/questions/${id}`)
+      .get(`${process.env.REACT_APP_SERVER}/questions/${id}`)
       .then((res) => {
         setUpdate(res.data);
       })
@@ -81,10 +79,9 @@ const QuestionContent = ({ detail }) => {
     navigate(`/updatequestion/${detail.id}`);
   };
 
-
   const onDelete = () => {
     axios
-      .delete(`/questions/${detail.id}`)
+      .delete(`${process.env.REACT_APP_SERVER}/questions/${detail.id}`)
       .then((res) => {
         alert('삭제되었습니다.');
 
@@ -137,8 +134,8 @@ export default QuestionContent;
 
 /* TODO:
 1. 기본 구조 구현 *
-2. 데이터 불러오기
-2-1. data.content
-2-2. data.username
-3. styled-components 적용
+2. 데이터 불러오기 *
+2-1. data.content *
+2-2. data.username * 
+3. styled-components 적용 *
 */

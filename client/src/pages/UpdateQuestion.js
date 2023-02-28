@@ -181,7 +181,7 @@ const UpdateQuestion = ({ title, setTitle, content, setContent }) => {
   useEffect(() => {
     const { id } = params;
     axios
-      .get(`/questions/${id}`)
+      .get(`${process.env.REACT_APP_SERVER}/questions/${id}`)
       .then((res) => {
         setUpdateTitle(res.data.title);
         setUpdateContent(res.data.content);
@@ -189,18 +189,14 @@ const UpdateQuestion = ({ title, setTitle, content, setContent }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(updateTitle);
-  console.log(updateContent);
-
   const handSubmit = () => {
     const { id } = params;
     axios
-      .patch(`/questions/${id}`, {
+      .patch(`${process.env.REACT_APP_SERVER}/questions/${id}`, {
         title: updateTitle,
         content: updateContent,
       })
       .then((res) => {
-        console.log(res);
         navigate(`/readquestion/${id}`);
       })
       .catch((err) => console.log(err));
@@ -276,9 +272,9 @@ export default UpdateQuestion;
 
 /* TODO:
 1. 기본 구조 구현 * 
-2. styled-components 적용
+2. styled-components 적용 *
 3. input 창 구현 * 
 4. input value 구현 * 
 5. input 창 클릭 시 옆에 modal 구현
-6. POST 요청 보내기
+6. POST 요청 보내기 *
 */

@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import ListContainer from '../components/ListContainer';
 import SideBar from '../components/SideBar';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -106,9 +106,9 @@ const Main = () => {
 export default Main;
 
 /* TODO: 
-1. 기본 구조 구현
+1. 기본 구조 구현 *
 2. 컴포넌트 위치 조정
 3. styled-componenst 적용
-4. 데이터 불러오기
+4. 데이터 불러오기 *
 5. <div className="count">39 questions</div> 에 질문 length 적용
  */

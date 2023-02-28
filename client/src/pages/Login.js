@@ -1,6 +1,6 @@
+import { useGoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
 import { ReactComponent as Logo } from '../svg/stackoverflow2.svg';
-import { useGoogleLogin } from '@react-oauth/google';
 
 import axios from 'axios';
 
@@ -102,7 +102,7 @@ const Login = () => {
     };
 
     axios
-      .post(`/login`, userInfo)
+      .post(`${process.env.REACT_APP_SERVER}/login`, userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data !== undefined) {

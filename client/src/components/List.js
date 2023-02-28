@@ -70,7 +70,7 @@ const List = ({ questions }) => {
   const [content, setContent] = useState('');
   const moveRead = (id) => {
     axios
-      .get(`/questions/${questions.id}`)
+      .get(`${process.env.REACT_APP_SERVER}/questions/${questions.id}`)
       .then((res) => {
         setContent(res.data.content);
       })
@@ -115,13 +115,13 @@ export default List;
 
 /* TODO:
 1. 기본 구조 적용 * 
-2. styled-components 적용
-3. 데이터 불러오기
-3-1. data.title
-3-2. data.content
-3-3. data.createdAt
-3-4. data.username
+2. styled-components 적용 *
+3. 데이터 불러오기 * 
+3-1. data.title *
+3-2. data.content *
+3-3. data.createdAt *
+3-4. data.username *
 3-5. data.아이콘?
 3-6. data.answerLength
-4. 제목 hover, color 변경
+4. 제목 hover, color 변경 *
 */

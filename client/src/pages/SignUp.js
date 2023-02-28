@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
 
 import axios from 'axios';
 
@@ -143,7 +143,7 @@ const SignUp = () => {
       };
 
       axios
-        .post('/users/sign-in', info)
+        .post(`${process.env.REACT_APP_SERVER}/users/sign-in`, info)
         .then((res) => {
           console.log(res.data);
         })
