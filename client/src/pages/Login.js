@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { ReactComponent as Logo } from '../svg/stackoverflow2.svg';
 import { useGoogleLogin } from '@react-oauth/google';
 
+import axios from 'axios';
+
 import styled from 'styled-components';
 import Header from '../components/Header';
 
@@ -78,35 +80,52 @@ const StyledBody = styled.div`
 `;
 
 const Login = () => {
-  const [userId, setUserId] = useState('');
-  const [userPw, setUserPw] = useState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+
+  // const state = useSelector((state) => state);
+  // const dispatch = useDispatch();
 
   const handleInputId = (e) => {
-    setUserId(e.target.value);
+    setUserName(e.target.value);
   };
 
   const handleInputPw = (e) => {
-    setUserPw(e.target.value);
+    setPassword(e.target.value);
   };
 
-  const handleClickButton = async () => {
-    console.log(`userId: ${userId}, userPw: ${userPw}`);
-    //   const userInfo = {
-    //     userId,
-    //     userPw,
-    //   };
+  const handleClickButton = () => {
+    console.log(`userId: ${username}, userPw: ${password}`);
+    const userInfo = {
+      username,
+      password,
+    };
 
-    //   const normalLogin = await fetch('', {
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(userInfo),
-    //   }).then((res) => {
-    //     console.log(res);
-    //   });
+    axios
+      .post(`/login`, userInfo)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data !== undefined) {
+          localStorage.clear();
+          localStorage.setItem('id', res.data.id);
+          localStorage.setItem('username', res.data.username);
+          localStorage.setItem('isLogin', true);
+          let isLogin = localStorage.getItem('isLogin');
+          isLogin ? moveMainPage() : stayLoginPage();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 400) alert(err.response.data);
+      });
+  };
+
+  const moveMainPage = () => {
     document.location.href = '/main';
+  };
+
+  const stayLoginPage = () => {
+    alert('로그인에 실패하였습니다.');
   };
 
   const googlelogin = useGoogleLogin({

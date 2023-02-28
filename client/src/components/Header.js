@@ -60,6 +60,13 @@ const SecondButton = styled.button`
 `;
 
 const Header = () => {
+  let isLogin = localStorage.getItem('isLogin');
+  let username = localStorage.getItem('username');
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    document.location.href = '/';
+  };
   return (
     // <header>
     <FirstDiv>
@@ -81,16 +88,25 @@ const Header = () => {
           <li>
             <input type="text" />
           </li>
-          <li>
-            <Link to="/login">
-              <FirstButton>Log in</FirstButton>
-            </Link>
-          </li>
-          <li>
-            <Link to="/signup">
-              <SecondButton>Sign up</SecondButton>
-            </Link>
-          </li>
+          {isLogin ? (
+            <>
+              <li>{username}</li>
+              <button onClick={() => handleLogOut()}>로그아웃</button>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/login">
+                  <FirstButton>Log in</FirstButton>
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup">
+                  <SecondButton>Sign up</SecondButton>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </FirstDiv>
