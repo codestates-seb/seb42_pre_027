@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db-seb27.cyljhjyegh0e.ap-northeast-2.rds.amazonaws.com:13306/test
+    username: admin
+    password: 12345678
+
+config:
+  domain:
