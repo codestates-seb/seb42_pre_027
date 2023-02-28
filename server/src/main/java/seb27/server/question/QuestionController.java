@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
@@ -29,8 +30,8 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getQuestions(@Positive @RequestParam int page,
-                                       @Positive @RequestParam int size){
+    public ResponseEntity getQuestions(@Positive @RequestParam(defaultValue = "1") int page,
+                                       @Positive @RequestParam(defaultValue = "100") int size){
         Page<Question> pageQuestions = questionService.findAllQuestion(page-1, size);
         List<Question> questions = pageQuestions.getContent();
         List<QuestionDto.Response> results = customQuestionMapper.questionsToQuestionResponseDtos(questions);

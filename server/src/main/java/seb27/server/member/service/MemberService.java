@@ -9,13 +9,12 @@ import java.util.List;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
-    // private final PasswordEncoder passwordEncoder;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
-
     public Member createMember(Member member) {
+
         return memberRepository.save(member);
     }
 
