@@ -107,7 +107,7 @@ const ReadQuestion = () => {
             <section className="section-content">
               <div className="content">
                 <QuestionContent detail={detail} setDetail={setDetail} />
-                <AnswerContainer id={id} />
+                <AnswerContainer detail={detail} />
               </div>
             </section>
             <Aside />
