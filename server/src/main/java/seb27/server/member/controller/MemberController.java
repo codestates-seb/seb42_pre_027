@@ -13,6 +13,7 @@ import seb27.server.member.service.MemberService;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 @Validated

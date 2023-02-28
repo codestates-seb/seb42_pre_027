@@ -12,6 +12,7 @@ import seb27.server.answer.service.AnswerService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/questions")
 public class AnswerController {

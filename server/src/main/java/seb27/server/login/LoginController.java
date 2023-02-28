@@ -3,6 +3,7 @@ package seb27.server.login;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import seb27.server.member.dto.MemberDto;
@@ -13,6 +14,7 @@ import seb27.server.member.service.MemberService;
 
 import java.util.Optional;
 
+@CrossOrigin
 @Controller
 public class LoginController {
     private final MemberService memberService;
