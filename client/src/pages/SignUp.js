@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+
+import axios from 'axios';
 
 const StyledButton = styled.button`
   margin-bottom: 10px;
@@ -96,6 +99,65 @@ const StyledDiv = styled.div`
 `;
 
 const SignUp = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [isUserName, setIsUserName] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+
+  const checkId = (e) => {
+    var regExp = /^[A-Za-z0-9+]{6,}$/;
+
+    if (regExp.test(e.target.value) === false) {
+      alert('6글자 이상, 문자 또는 숫자를 포함해서 작성해주세요.');
+      e.target.value = '';
+    } else {
+      setUsername(e.target.value);
+      setIsUserName((current) => !current);
+    }
+  };
+
+  const checkPassword = (e) => {
+    var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
+
+    if (regExp.test(e.target.value) === false) {
+      alert('8 ~ 10자 영문, 숫자 조합으로 만들어주세요.');
+      e.target.value = '';
+    } else {
+      setPassword(e.target.value);
+      setIsPassword((current) => !current);
+    }
+  };
+
+  const handleSignupButon = () => {
+    if (isUserName === false) {
+      alert('양식에 맞게 아이디를 작성해주세요.');
+    } else if (isPassword === false) {
+      alert('양식에 맞게 비밀번호를 작성해주세요.');
+    }
+
+    if (isUserName === true && isPassword === true) {
+      const info = {
+        username,
+        password,
+      };
+
+      axios
+        .post('/users/sign-in', info)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+      console.log(info);
+      const checkConfirm = confirm('로그인 페이지로 이동하시겠습니까?');
+      if (checkConfirm) {
+        document.location.href = '/login';
+      } else {
+        document.location.href = '/signup';
+      }
+    }
+  };
+
   return (
     <StyledDiv>
       <div className="outsideContainer">
@@ -141,11 +203,13 @@ const SignUp = () => {
           <div className="signupInput">
             <div className="inputDiv">
               <label htmlFor="displayName">Display name</label>
-              <input type="text" id="displayName"></input>
-              <label htmlFor="signupId">Email</label>
-              <input type="text" id="signupId"></input>
+              <input type="text" id="displayName" onBlur={checkId}></input>
               <label htmlFor="signupPassword">Password</label>
-              <input type="text" id="signupPassword"></input>
+              <input
+                type="password"
+                id="signupPassword"
+                onBlur={checkPassword}
+              ></input>
               <span
                 style={{
                   'font-size': 'small',
@@ -162,6 +226,7 @@ const SignUp = () => {
                   color: 'white',
                   width: '250px',
                 }}
+                onClick={handleSignupButon}
               >
                 Sign up
               </StyledButton>

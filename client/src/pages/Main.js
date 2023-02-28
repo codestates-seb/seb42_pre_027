@@ -5,6 +5,8 @@ import Header from '../components/Header';
 import ListContainer from '../components/ListContainer';
 import SideBar from '../components/SideBar';
 
+import { useState, useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
@@ -59,6 +61,18 @@ const MainPage = styled.main`
 `;
 
 const Main = () => {
+  const [isLogin, setIsLogin] = useState();
+
+  let stateLogin = localStorage.getItem('isLogin');
+  useEffect(() => {
+    setIsLogin(stateLogin);
+    console.log('isLogin', isLogin);
+  });
+
+  if (isLogin === null) {
+    document.location.href = '/';
+  }
+
   const navigate = useNavigate();
   const goToCreateQuestion = () => {
     navigate('/createquestion');
