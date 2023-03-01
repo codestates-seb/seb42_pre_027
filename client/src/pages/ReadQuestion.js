@@ -29,6 +29,7 @@ const Content = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
   width: 90%;
   padding: 24px;
   .top {
@@ -107,14 +108,15 @@ const ReadQuestion = () => {
             <section className="section-content">
               <div className="content">
                 <QuestionContent detail={detail} setDetail={setDetail} />
-                <AnswerContainer detail={detail} />
+                <Aside />
               </div>
             </section>
-            <Aside />
+            <AnswerContainer detail={detail} />
+           
           </Content>
         </MainQuestion>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
