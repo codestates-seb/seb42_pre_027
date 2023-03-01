@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Up } from '../svg/svg-up.svg';
 import { ReactComponent as Down } from '../svg/svg-down.svg';
+import ReactHtmlParser from 'react-html-parser';
 
 const StyledBox = styled.div`
   border-bottom: 1px solid lightgray;
@@ -22,20 +23,32 @@ const StyledBox = styled.div`
     color: gray;
     text-align: start;
     margin: 0 10px;
+    display: flex;
   }
 
   .contentBox .buttonarea span {
     margin: 0 5px;
+    
   }
 
   .contentBox .buttonarea span:hover {
     text-decoration: underline;
     cursor: pointer;
   }
+
+  .contentBox .buttonarea .userId {
+    color: black
+  }
 `;
 
-const AnswerContent = () => {
+
+
+const AnswerContent = ({ lists, editAnswer, deleteAnswer }) => {
+  const [edited, setEdited] = useState(false);
   const [recomend, setRecomend] = useState(0);
+  const [value, setValue] = useState("");
+  const contentInput = useRef();
+  const answerId = lists.answerId
 
   const handleClickUp = () => {
     setRecomend((current) => current + 1);
@@ -44,6 +57,26 @@ const AnswerContent = () => {
   const handleClickDown = () => {
     setRecomend((current) => current - 1);
   };
+
+  const handleEdit = () => {
+   
+    if(edited){
+      editAnswer(lists.answerId, lists.userId, value)
+    } 
+    setEdited((current) => !current)
+  }
+
+  const inputChange = (e) => {
+    console.log('e.target.value', e.target.value)
+    setValue(e.target.value)
+  }
+
+  useEffect(() => {
+    if(edited){
+    contentInput.current.focus()
+    }
+  },[edited])
+  
   return (
     <StyledBox>
       <div className="conuntBox">
@@ -52,15 +85,15 @@ const AnswerContent = () => {
         <Down onClick={handleClickDown} />
       </div>
       <div className="contentBox">
-        <p className="textarea">
-          Because the only thing worse than building internal tools is
-          maintaining them... Because the only thing worse than building
-          internal tools is maintaining them... Because the only thing worse
-          than building internal tools is maintaining them...
-        </p>
+        <div className="textarea">
+          
+          {edited ? <input type="textArea" ref={contentInput} defaultValue={ReactHtmlParser(lists.content)[0].props.children} onChange={inputChange}></input> : ReactHtmlParser(lists.content)}
+        
+        </div>
         <div className="buttonarea">
-          <span className="edit">edit</span>
-          <span className="delete">delete</span>
+          <span className="edit" onClick={handleEdit}>{edited? "save" : "edit" }</span>
+          {edited? "" : <span className="delete" onClick={() => deleteAnswer(answerId)} >delete</span>}
+          <span className="userId">{lists.username}</span>
         </div>
       </div>
     </StyledBox>

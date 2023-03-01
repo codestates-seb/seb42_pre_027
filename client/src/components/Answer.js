@@ -1,6 +1,7 @@
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 
@@ -20,23 +21,43 @@ const ContainerBox = styled.div`
   }
 `;
 
-const Answer = () => {
+const Answer = ( {detail, getList} ) => {
   const [content, setContent] = useState('');
-  // const []
 
-  const handleSaveButton = (event, data) => {
+  const handleContent = (event, data) => {
+    console.log(event.data)
     setContent(data);
-
-    const date = new Date();
-    const created_date = date.toLocaleString();
-
-    const body = {
-      data,
-      created_date,
-    };
-
-    body;
+    console.log(content)
+    
   };
+
+  const handleSaveButton = () => {
+    if(content.length === 0){
+      alert('내용을 입력해주세요.')
+    } else {
+      console.log(content)
+      const username = localStorage.getItem('username')
+      const userId = localStorage.getItem('id')
+  
+      const body = {
+        userId,
+        username,
+        questionId: detail.id,
+        content
+      }
+  
+      axios
+        .post(`${process.env.REACT_APP_SERVER}/questions/${detail.id}`, body)
+        .then((res) => {
+          console.log(res)
+          if(res.status === 201){
+            getList()
+           
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }
 
   return (
     <ContainerBox>
@@ -52,8 +73,8 @@ const Answer = () => {
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
-          handleSaveButton(event, data);
-          // console.log({ event, editor, data });
+          handleContent(event, data);
+          console.log({ event, editor, data });
         }}
         onBlur={(event, editor) => {
           console.log('Blur.', editor);
@@ -62,9 +83,8 @@ const Answer = () => {
           console.log('Focus.', editor);
         }}
       />
-      {ReactHtmlParser(content)}
-
-      <PostButton>Post Your Answer</PostButton>
+      
+      <PostButton onClick={() => handleSaveButton()}>Post Your Answer</PostButton>
     </ContainerBox>
   );
 };
