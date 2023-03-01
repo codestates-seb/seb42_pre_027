@@ -15,9 +15,9 @@ const StyledButton = styled.button`
 `;
 
 const StyledBody = styled.div`
-  margin-top: 50px;
   height: 100%;
   background-color: rgba(239, 240, 241);
+
   .innerContainer {
     display: flex;
     flex-direction: column;
@@ -95,7 +95,6 @@ const Login = () => {
   };
 
   const handleClickButton = () => {
-    console.log(`userId: ${username}, userPw: ${password}`);
     const userInfo = {
       username,
       password,
@@ -104,7 +103,6 @@ const Login = () => {
     axios
       .post(`${process.env.REACT_APP_SERVER}/login`, userInfo)
       .then((res) => {
-        console.log(res.data);
         if (res.data !== undefined) {
           localStorage.clear();
           localStorage.setItem('id', res.data.id);
@@ -115,7 +113,6 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         if (err.response.status === 400) alert(err.response.data);
       });
   };

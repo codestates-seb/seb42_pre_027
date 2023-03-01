@@ -28,7 +28,7 @@ const MainQuestion = styled.main`
 const Content = styled.section`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
   width: 90%;
   padding: 24px;
@@ -75,6 +75,9 @@ const Content = styled.section`
       border-bottom: 1px solid #babfc3;
       padding-bottom: 16px;
     }
+  }
+  .answerContainer{
+    
   }
   #create-btn {
     color: white;

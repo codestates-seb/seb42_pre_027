@@ -15,7 +15,6 @@ const AnswerContainer = ( {detail} ) => {
     .get(`${process.env.REACT_APP_SERVER}/questions/${detail.id}/`)
     .then((res) => {
       setLists(res.data.answers);
-      console.log(res.data.answers)
     })
     .catch((err) => console.log(err));
   }
@@ -25,7 +24,6 @@ const AnswerContainer = ( {detail} ) => {
     axios
       .delete(`${process.env.REACT_APP_SERVER}/questions/${detail.id}/answers/${answerId}`)
       .then((res) => {
-        console.log(res)
         if(res.status === 202 || res.status === 204){
           getList()
         }
@@ -34,15 +32,14 @@ const AnswerContainer = ( {detail} ) => {
 
   const editAnswer = (answerId, userId, content) => {
     const edited = {
-      answerId,
       userId,
+      answerId,
       content
     }
-    
+
     axios
       .patch(`${process.env.REACT_APP_SERVER}/questions/${detail.id}/answers/${answerId}`, edited)
       .then(res => {
-        console.log(res)
         if(res.status === 200 || res.status === 202 || res.status === 204){
           getList()
         }

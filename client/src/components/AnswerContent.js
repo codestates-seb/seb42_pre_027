@@ -67,7 +67,6 @@ const AnswerContent = ({ lists, editAnswer, deleteAnswer }) => {
   }
 
   const inputChange = (e) => {
-    console.log('e.target.value', e.target.value)
     setValue(e.target.value)
   }
 

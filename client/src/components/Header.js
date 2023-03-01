@@ -11,11 +11,13 @@ const FirstDiv = styled.header`
   top: 0;
   box-shadow: 0px 2px 3px rgba(217, 218, 219);
   z-index: 999;
+
   div {
     display: flex;
     justify-content: center;
     margin: 3px 0;
   }
+
   div .firstUl {
     display: flex;
     align-items: center;
@@ -23,6 +25,7 @@ const FirstDiv = styled.header`
     color: rgba(72, 79, 85);
     font-size: small;
   }
+
   div .firstUl li {
     padding: 10px;
   }
@@ -32,15 +35,24 @@ const FirstDiv = styled.header`
     align-items: center;
     list-style: none;
   }
+
   div .secondUl li {
     margin: 0 2px 0;
   }
+
   div .secondUl li input {
     width: 500px;
   }
 
-  div ul li {
+  div ul .userId{
+    margin: 10px;
+    color: rgba(100,80,60,0.6);
   }
+
+  div ul .userId:hover{
+    text-decoration: underline;
+  }
+  
 `;
 
 const FirstButton = styled.button`
@@ -68,14 +80,14 @@ const Header = () => {
     document.location.href = '/';
   };
   return (
-    // <header>
     <FirstDiv>
       <div>
-        {/* <span>MENU</span> */}
         <span>
-          <Link to="/">
+          {isLogin ? <Link to="/main">
             <Logo fill="current" />
-          </Link>
+          </Link> : <Link to="/">
+            <Logo fill="current" />
+          </Link>}
         </span>
 
         <ul className="firstUl">
@@ -90,8 +102,8 @@ const Header = () => {
           </li>
           {isLogin ? (
             <>
-              <li>{username}</li>
-              <button onClick={() => handleLogOut()}>로그아웃</button>
+              <li className='userId'>{username}</li>
+              <SecondButton onClick={() => handleLogOut()}>로그아웃</SecondButton>
             </>
           ) : (
             <>
@@ -110,7 +122,6 @@ const Header = () => {
         </ul>
       </div>
     </FirstDiv>
-    // </header>
   );
 };
 

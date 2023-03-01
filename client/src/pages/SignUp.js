@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-
+import Header from '../components/Header';
 import axios from 'axios';
 
 const StyledButton = styled.button`
@@ -12,7 +12,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledDiv = styled.div`
-  margin-top: 50px;
+  /* margin-top: 1px; */
   height: 100%;
   background-color: rgba(239, 240, 241);
   display: flex;
@@ -38,9 +38,20 @@ const StyledDiv = styled.div`
     display: flex;
   }
 
+  .outsideContainer .leftContainer span {
+    text-align: start;
+  }
+
   .outsideContainer .leftContainer div div {
     margin-bottom: 15px;
   }
+
+  .outsideContainer .leftContainer div .small-title {
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+
 
   .outsideContainer .rightContainer {
     display: flex;
@@ -59,7 +70,7 @@ const StyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     width: 300px;
-    height: 700px;
+    height: 500px;
     margin: 30px auto;
     background-color: white;
     border-radius: 10px;
@@ -95,6 +106,15 @@ const StyledDiv = styled.div`
     font-size: 1.5ch;
     font-weight: 550;
     margin: 10px;
+  }
+
+  .outsideContainer .rightContainer .signupInput .inputDiv span {
+ 
+    font-size: small;
+    text-align: start;
+    margin: 0 25px;
+
+
   }
 `;
 
@@ -148,9 +168,9 @@ const SignUp = () => {
           console.log(res.data);
         })
         .catch((err) => console.log(err));
-      console.log(info);
-      const checkConfirm = confirm('로그인 페이지로 이동하시겠습니까?');
-      if (checkConfirm) {
+      document.location.href= '/login'
+
+      if (window.confirm('로그인 페이지로 이동하시겠습니까?')) {
         document.location.href = '/login';
       } else {
         document.location.href = '/signup';
@@ -159,82 +179,79 @@ const SignUp = () => {
   };
 
   return (
-    <StyledDiv>
-      <div className="outsideContainer">
-        <div className="leftContainer">
-          <div>
-            <div style={{ 'font-size': 'x-large', 'font-weight': 'bold' }}>
-              Join the Stack Overflow community
-            </div>
-          </div>
-          <div>
-            <div>image</div>
-            <div>Get unstuck — ask a question</div>
-          </div>
-          <div>
-            <div>image</div>
-            <div>Unlock new privileges like voting and commenting</div>
-          </div>
-          <div>
-            <div>image</div>
-            <div>Save your favorite tags, filters, and jobs</div>
-          </div>
-          <div>
-            <div>image</div>
-            <div>Earn reputation and badges</div>
-          </div>
-          <span style={{ 'text-align': 'start' }}>
-            Collaborate and share knowledge with a private group for FREE.
-            <br />
-            Get Stack Overflow for Teams free for up to 50 users.
-          </span>
-        </div>
-        <div className="rightContainer">
-          <div className="signupButton">
-            <StyledButton style={{ background: 'white' }}>
-              Sign up with Google
-            </StyledButton>
-            <StyledButton
-              style={{ background: 'rgba(41, 45, 48)', color: 'white' }}
-            >
-              Sign up with GitHub
-            </StyledButton>
-          </div>
-          <div className="signupInput">
-            <div className="inputDiv">
-              <label htmlFor="displayName">Display name</label>
-              <input type="text" id="displayName" onBlur={checkId}></input>
-              <label htmlFor="signupPassword">Password</label>
-              <input
-                type="password"
-                id="signupPassword"
-                onBlur={checkPassword}
-              ></input>
-              <span
-                style={{
-                  'font-size': 'small',
-                  'text-align': 'start',
-                  margin: '0 25px',
-                }}
-              >
-                Passwords must contain at least eight characters, including at
-                least 1 letter and 1 number.
+    <div>
+      <Header />
+        <StyledDiv>
+          <div className="outsideContainer">
+            <div className="leftContainer">
+              <div>
+                <div className='small-title'>
+                  Join the Stack Overflow community
+                </div>
+              </div>
+              <div>
+                <div>image</div>
+                <div>Get unstuck — ask a question</div>
+              </div>
+              <div>
+                <div>image</div>
+                <div>Unlock new privileges like voting and commenting</div>
+              </div>
+              <div>
+                <div>image</div>
+                <div>Save your favorite tags, filters, and jobs</div>
+              </div>
+              <div>
+                <div>image</div>
+                <div>Earn reputation and badges</div>
+              </div>
+              <span>
+                Collaborate and share knowledge with a private group for FREE.
+                <br />
+                Get Stack Overflow for Teams free for up to 50 users.
               </span>
-              <StyledButton
-                style={{
-                  background: 'rgba(18, 133, 251)',
-                  color: 'white',
-                  width: '250px',
-                }}
-                onClick={handleSignupButon}
-              >
-                Sign up
-              </StyledButton>
+            </div>
+            <div className="rightContainer">
+              <div className="signupButton">
+                <StyledButton style={{ background: 'white' }}>
+                  Sign up with Google
+                </StyledButton>
+                <StyledButton
+                  style={{ background: 'rgba(41, 45, 48)', color: 'white' }}
+                >
+                  Sign up with GitHub
+                </StyledButton>
+              </div>
+              <div className="signupInput">
+                <div className="inputDiv">
+                  <label htmlFor="displayName">Display name</label>
+                  <input type="text" id="displayName" onBlur={checkId}></input>
+                  <label htmlFor="signupPassword">Password</label>
+                  <input
+                    type="password"
+                    id="signupPassword"
+                    onBlur={checkPassword}
+                  ></input>
+                  <span>
+                    Passwords must contain at least eight characters, including at
+                    least 1 letter and 1 number.
+                  </span>
+                  <StyledButton
+                    style={{
+                      background: 'rgba(18, 133, 251)',
+                      color: 'white',
+                      width: '250px',
+                    }}
+                    onClick={handleSignupButon}
+                  >
+                    Sign up
+                  </StyledButton>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </StyledDiv>
+        </StyledDiv>
+    </div>
   );
 };
 

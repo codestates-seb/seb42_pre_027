@@ -25,9 +25,8 @@ const Answer = ( {detail, getList} ) => {
   const [content, setContent] = useState('');
 
   const handleContent = (event, data) => {
-    console.log(event.data)
     setContent(data);
-    console.log(content)
+
     
   };
 
@@ -35,21 +34,18 @@ const Answer = ( {detail, getList} ) => {
     if(content.length === 0){
       alert('내용을 입력해주세요.')
     } else {
-      console.log(content)
       const username = localStorage.getItem('username')
       const userId = localStorage.getItem('id')
   
       const body = {
         userId,
         username,
-        questionId: detail.id,
         content
       }
   
       axios
         .post(`${process.env.REACT_APP_SERVER}/questions/${detail.id}`, body)
         .then((res) => {
-          console.log(res)
           if(res.status === 201){
             getList()
            
@@ -67,20 +63,9 @@ const Answer = ( {detail, getList} ) => {
         config={{
           placeholder: '내용을 입력하세요.',
         }}
-        onReady={(editor) => {
-          // You can store the "editor" and use when it is needed.
-          console.log('Editor is ready to use!', editor);
-        }}
         onChange={(event, editor) => {
           const data = editor.getData();
           handleContent(event, data);
-          console.log({ event, editor, data });
-        }}
-        onBlur={(event, editor) => {
-          console.log('Blur.', editor);
-        }}
-        onFocus={(event, editor) => {
-          console.log('Focus.', editor);
         }}
       />
       
