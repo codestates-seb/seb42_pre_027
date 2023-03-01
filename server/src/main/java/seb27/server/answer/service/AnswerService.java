@@ -35,9 +35,7 @@ public class AnswerService {
     }
 
     public Answer updateAnswer(Answer answer) {
-
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
-
         Optional.ofNullable(answer.getContent()).ifPresent(content -> findAnswer.setContent(content));
 
         findAnswer.setModifiedAt(LocalDateTime.now());
@@ -45,7 +43,6 @@ public class AnswerService {
     }
 
     public void deleteAnswer(long answerId) {
-
         Answer findAnswer = findVerifiedAnswer(answerId);
         Question question = findAnswer.getQuestion();
         question.setAnswerCount(question.getAnswerCount()-1);

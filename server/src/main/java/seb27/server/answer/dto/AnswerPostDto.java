@@ -16,9 +16,6 @@ public class AnswerPostDto {
     @Positive
     private long userId;
 
-    @Positive
-    private long questionId;
-
     @NotBlank
     String content;
 
