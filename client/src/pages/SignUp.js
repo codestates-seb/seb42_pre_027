@@ -1,7 +1,7 @@
+import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import axios from 'axios';
 
 const StyledButton = styled.button`
   margin-bottom: 10px;
@@ -50,8 +50,6 @@ const StyledDiv = styled.div`
     font-size: x-large;
     font-weight: bold;
   }
-
-
 
   .outsideContainer .rightContainer {
     display: flex;
@@ -109,12 +107,9 @@ const StyledDiv = styled.div`
   }
 
   .outsideContainer .rightContainer .signupInput .inputDiv span {
- 
     font-size: small;
     text-align: start;
     margin: 0 25px;
-
-
   }
 `;
 
@@ -165,10 +160,10 @@ const SignUp = () => {
       axios
         .post(`${process.env.REACT_APP_SERVER}/users/sign-in`, info)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
         })
         .catch((err) => console.log(err));
-      document.location.href= '/login'
+      document.location.href = '/login';
 
       if (window.confirm('로그인 페이지로 이동하시겠습니까?')) {
         document.location.href = '/login';
@@ -181,76 +176,76 @@ const SignUp = () => {
   return (
     <div>
       <Header />
-        <StyledDiv>
-          <div className="outsideContainer">
-            <div className="leftContainer">
-              <div>
-                <div className='small-title'>
-                  Join the Stack Overflow community
-                </div>
+      <StyledDiv>
+        <div className="outsideContainer">
+          <div className="leftContainer">
+            <div>
+              <div className="small-title">
+                Join the Stack Overflow community
               </div>
-              <div>
-                <div>image</div>
-                <div>Get unstuck — ask a question</div>
-              </div>
-              <div>
-                <div>image</div>
-                <div>Unlock new privileges like voting and commenting</div>
-              </div>
-              <div>
-                <div>image</div>
-                <div>Save your favorite tags, filters, and jobs</div>
-              </div>
-              <div>
-                <div>image</div>
-                <div>Earn reputation and badges</div>
-              </div>
-              <span>
-                Collaborate and share knowledge with a private group for FREE.
-                <br />
-                Get Stack Overflow for Teams free for up to 50 users.
-              </span>
             </div>
-            <div className="rightContainer">
-              <div className="signupButton">
-                <StyledButton style={{ background: 'white' }}>
-                  Sign up with Google
-                </StyledButton>
+            <div>
+              <div>image</div>
+              <div>Get unstuck — ask a question</div>
+            </div>
+            <div>
+              <div>image</div>
+              <div>Unlock new privileges like voting and commenting</div>
+            </div>
+            <div>
+              <div>image</div>
+              <div>Save your favorite tags, filters, and jobs</div>
+            </div>
+            <div>
+              <div>image</div>
+              <div>Earn reputation and badges</div>
+            </div>
+            <span>
+              Collaborate and share knowledge with a private group for FREE.
+              <br />
+              Get Stack Overflow for Teams free for up to 50 users.
+            </span>
+          </div>
+          <div className="rightContainer">
+            <div className="signupButton">
+              <StyledButton style={{ background: 'white' }}>
+                Sign up with Google
+              </StyledButton>
+              <StyledButton
+                style={{ background: 'rgba(41, 45, 48)', color: 'white' }}
+              >
+                Sign up with GitHub
+              </StyledButton>
+            </div>
+            <div className="signupInput">
+              <div className="inputDiv">
+                <label htmlFor="displayName">Display name</label>
+                <input type="text" id="displayName" onBlur={checkId}></input>
+                <label htmlFor="signupPassword">Password</label>
+                <input
+                  type="password"
+                  id="signupPassword"
+                  onBlur={checkPassword}
+                ></input>
+                <span>
+                  Passwords must contain at least eight characters, including at
+                  least 1 letter and 1 number.
+                </span>
                 <StyledButton
-                  style={{ background: 'rgba(41, 45, 48)', color: 'white' }}
+                  style={{
+                    background: 'rgba(18, 133, 251)',
+                    color: 'white',
+                    width: '250px',
+                  }}
+                  onClick={handleSignupButon}
                 >
-                  Sign up with GitHub
+                  Sign up
                 </StyledButton>
-              </div>
-              <div className="signupInput">
-                <div className="inputDiv">
-                  <label htmlFor="displayName">Display name</label>
-                  <input type="text" id="displayName" onBlur={checkId}></input>
-                  <label htmlFor="signupPassword">Password</label>
-                  <input
-                    type="password"
-                    id="signupPassword"
-                    onBlur={checkPassword}
-                  ></input>
-                  <span>
-                    Passwords must contain at least eight characters, including at
-                    least 1 letter and 1 number.
-                  </span>
-                  <StyledButton
-                    style={{
-                      background: 'rgba(18, 133, 251)',
-                      color: 'white',
-                      width: '250px',
-                    }}
-                    onClick={handleSignupButon}
-                  >
-                    Sign up
-                  </StyledButton>
-                </div>
               </div>
             </div>
           </div>
-        </StyledDiv>
+        </div>
+      </StyledDiv>
     </div>
   );
 };

@@ -68,8 +68,8 @@ const List = ({ questions }) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const moveRead = (id) => {
-    axios
+  const moveRead = async (id) => {
+    await axios
       .get(`${process.env.REACT_APP_SERVER}/questions/${questions.id}`)
       .then((res) => {
         setContent(res.data.content);

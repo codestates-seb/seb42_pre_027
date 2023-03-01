@@ -66,7 +66,6 @@ const Main = () => {
   let stateLogin = localStorage.getItem('isLogin');
   useEffect(() => {
     setIsLogin(stateLogin);
-    console.log('isLogin', isLogin);
   });
 
   if (isLogin === null) {

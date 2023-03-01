@@ -178,7 +178,7 @@ const CreateQuestion = ({ title, setTitle, content, setContent }) => {
   };
 
   /* POST 요청 시, userId 포함 */
-  const handSubmit = () => {
+  const handSubmit = async () => {
     if (title === '' && content === '') {
       alert('제목 입력은 필수입니다');
     } else if (content === '') {
@@ -189,7 +189,7 @@ const CreateQuestion = ({ title, setTitle, content, setContent }) => {
       if (title.length > 15) {
         alert('제목이 15글자 초과입니다');
       } else {
-        axios
+        await axios
           .post(url, {
             title,
             content,

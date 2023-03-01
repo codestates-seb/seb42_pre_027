@@ -79,8 +79,8 @@ const QuestionContent = ({ detail }) => {
     navigate(`/updatequestion/${detail.id}`);
   };
 
-  const onDelete = () => {
-    axios
+  const onDelete = async () => {
+    await axios
       .delete(`${process.env.REACT_APP_SERVER}/questions/${detail.id}`)
       .then((res) => {
         alert('삭제되었습니다.');

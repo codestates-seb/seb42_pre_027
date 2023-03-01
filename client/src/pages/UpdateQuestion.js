@@ -165,6 +165,7 @@ const UpdateQuestion = ({ title, setTitle, content, setContent }) => {
   };
   const navigate = useNavigate();
   const params = useParams();
+  const { id } = params;
   const [updateTitle, setUpdateTitle] = useState('');
   const [updateContent, setUpdateContent] = useState('');
 
@@ -189,9 +190,8 @@ const UpdateQuestion = ({ title, setTitle, content, setContent }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handSubmit = () => {
-    const { id } = params;
-    axios
+  const handSubmit = async () => {
+    await axios
       .patch(`${process.env.REACT_APP_SERVER}/questions/${id}`, {
         title: updateTitle,
         content: updateContent,
