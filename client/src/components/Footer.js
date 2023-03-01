@@ -6,7 +6,7 @@ const FirstDiv = styled.div`
   display: flex;
   justify-content: center;
   z-index: 999;
-  /* position: absolute; */
+  position: fixed;
   bottom: 0;
   width: 100%;
   span {

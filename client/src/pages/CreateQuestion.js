@@ -10,6 +10,7 @@ const Content = styled.main`
   width: 100%;
   max-width: 1264px;
   margin: 0 auto;
+  margin-bottom: 181px;
   /* height: 100vh; */
   display: flex;
   align-items: flex-start;

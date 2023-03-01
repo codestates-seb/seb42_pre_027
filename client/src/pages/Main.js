@@ -17,6 +17,7 @@ const Container = styled.div`
     justify-content: center;
     max-width: 1264px;
     margin: 0 auto;
+    
   }
 `;
 
@@ -27,7 +28,6 @@ const MainPage = styled.main`
   max-width: 1100px;
   align-items: flex-start;
   margin-top: 60px;
-  margin-bottom: 60px;
   > section {
     display: flex;
     width: 100%;
@@ -40,6 +40,7 @@ const MainPage = styled.main`
   }
   .section-container {
     flex-direction: column;
+    margin-bottom: 200px;
   }
   .topbox {
     display: flex;

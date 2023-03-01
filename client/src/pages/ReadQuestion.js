@@ -77,7 +77,8 @@ const Content = styled.section`
     }
   }
   .answerContainer{
-    
+      margin-bottom: 200px;
+
   }
   #create-btn {
     color: white;
@@ -119,7 +120,7 @@ const ReadQuestion = () => {
           </Content>
         </MainQuestion>
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
