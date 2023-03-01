@@ -10,6 +10,7 @@ import seb27.server.answer.entity.Answer;
 import seb27.server.answer.mapper.AnswerMapper;
 import seb27.server.answer.service.AnswerService;
 
+import java.io.Console;
 import java.util.List;
 
 @CrossOrigin
@@ -28,12 +29,11 @@ public class AnswerController {
     public ResponseEntity postAnswer(@PathVariable("question-id") long questionId,
                                      @RequestBody AnswerPostDto postDto) {
 
-        Answer createAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto), postDto.getUserId(),postDto.getQuestionId());
+        Answer createAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto), postDto.getUserId(), questionId);
         AnswerResponseDto result = answerMapper.answerToAnswerResponseDto(createAnswer);
         result.setUserId(createAnswer.getMember().getId());
         result.setUsername(createAnswer.getMember().getUsername());
         result.setQuestionId(createAnswer.getQuestion().getId());
-
 
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
@@ -51,11 +51,10 @@ public class AnswerController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    // 전체 질문 가져오기
     @GetMapping("/{question-id}/answers")
     public ResponseEntity getAnswers() {
-
         List<Answer> answers = answerService.findAnswers();
-
         return new ResponseEntity<>(answers, HttpStatus.OK);
     }
 
@@ -63,13 +62,14 @@ public class AnswerController {
     public ResponseEntity patchAnswer(@PathVariable("question-id") long questionId,
                                       @PathVariable("answer-id") long answerId,
                                       @RequestBody AnswerPatchDto patchDto) {
-
         Answer answer = answerMapper.answerPatchDtoToAnswer(patchDto);
         answer.setAnswerId(answerId);
+
         Answer patchAnswer = answerService.updateAnswer(answer);
         AnswerResponseDto result = answerMapper.answerToAnswerResponseDto(patchAnswer);
         result.setUserId(patchAnswer.getMember().getId());
         result.setUsername(patchAnswer.getMember().getUsername());
+        result.setQuestionId(questionId);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

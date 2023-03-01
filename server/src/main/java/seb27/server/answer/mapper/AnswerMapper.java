@@ -8,10 +8,7 @@ import seb27.server.answer.entity.Answer;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
-
     Answer answerPostDtoToAnswer(AnswerPostDto postDto);
-
     Answer answerPatchDtoToAnswer(AnswerPatchDto patchDto);
-
     AnswerResponseDto answerToAnswerResponseDto(Answer answer);
 }
