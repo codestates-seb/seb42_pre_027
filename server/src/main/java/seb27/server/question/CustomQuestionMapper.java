@@ -54,6 +54,7 @@ public class CustomQuestionMapper implements QuestionMapper{
                     .map(answer -> new AnswerResponseDto(
                             answer.getAnswerId(),
                             answer.getMember().getId(),
+                            answer.getQuestion().getId(),
                             answer.getContent(),
                             answer.getMember().getUsername()
                     ))

@@ -32,6 +32,7 @@ public class AnswerController {
         AnswerResponseDto result = answerMapper.answerToAnswerResponseDto(createAnswer);
         result.setUserId(createAnswer.getMember().getId());
         result.setUsername(createAnswer.getMember().getUsername());
+        result.setQuestionId(createAnswer.getQuestion().getId());
 
 
         return new ResponseEntity<>(result, HttpStatus.CREATED);
@@ -45,6 +46,7 @@ public class AnswerController {
         AnswerResponseDto result = answerMapper.answerToAnswerResponseDto(answer);
         result.setUserId(answer.getMember().getId());
         result.setUsername(answer.getMember().getUsername());
+        result.setQuestionId(answer.getQuestion().getId());
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

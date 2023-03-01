@@ -12,6 +12,7 @@ import lombok.Setter;
 public class AnswerResponseDto {
     private long answerId;
     private long userId;
+    private long questionId;
     private String content;
     private String username;
 }
