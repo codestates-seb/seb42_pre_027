@@ -7,7 +7,7 @@
 | :---: | :---: | :---: | :---: | :---: |
 |  |  |  |  |  |
 | [@es39](https://github.com/es39) |    [@Yoonable](https://github.com/Yoonable) | [@klouxia](https://github.com/klouxia) | [@cherry2030](https://github.com/cherry2030) | [@Kimlabe](https://github.com/Kimlabe) |
-|||||
+||||<p align="left">- 질문 CRUD<br/>- 회원 CRUD<br/> - AWS(EC2, S3) 배포환경 구축</p>|
 
 ### Commit 컨벤션
 |커밋명|내용|
