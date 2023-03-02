@@ -7,7 +7,7 @@
 | :---: | :---: | :---: | :---: | :---: |
 |  |  |  |  |  |
 | [@es39](https://github.com/es39) |    [@Yoonable](https://github.com/Yoonable) | [@klouxia](https://github.com/klouxia) | [@cherry2030](https://github.com/cherry2030) | [@Kimlabe](https://github.com/Kimlabe) |
-||||<p align="left">- 질문 CRUD<br/>- 회원 CRUD<br/> - AWS(EC2, S3) 배포환경 구축</p>|
+|<p align="left">- 메인 페이지 구현<br/>- SideBar 구현<br/>- Aside 구현<br/>- 질문 리스트 컴포넌트 구현<br/>- 질문 조회 페이지 구현<br/>- 질문 작성 페이지 구현<br/>- 질문 수정 페이지 구현<br/>- 질문 CRUD 기능 구현</p>|||<p align="left">- 질문 CRUD<br/>- 회원 CRUD<br/> - AWS(EC2, S3) 배포환경 구축</p>|
 
 ### Commit 컨벤션
 |커밋명|내용|
